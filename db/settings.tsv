@@ -1,0 +1,2 @@
+id	forum_name	url	maintenance_mode	topics_per_page	posts_per_page	language	news	edit_limit	guest_view	delete_own_topics	delete_own_posts	max_username_length	max_signature_length	max_title_length	max_post_length
+1	Boards+Don%27t+Hit+Back	https%3A%2F%2Fchaozz.nl%2Fforum	0	20	20	english.php	A+new+forum%21%21	10	1	0	0	15	200	100	2500
