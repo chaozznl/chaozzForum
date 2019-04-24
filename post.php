@@ -1,0 +1,263 @@
+<?php if (!$called_from_index) Message ($txt[11], $txt[48], true); ?>
+<?php if (!isset($_SESSION['user_id'])) Message ($txt[11], $txt[94], true); ?>
+<?php
+	$caption = "";
+	$action = !empty($_REQUEST['action']) ? $_REQUEST['action'] : "";
+	
+	// some actions are staff only functions
+	if ($action == "topic.move" || $action == "topic.lock" || $action == "topic.unlock" || $action == "topic.sticky") 
+		if ($_SESSION['group_id'] == $default_group_id)
+			Message($txt[11], $txt[49], true);
+	
+	// check board
+	if ($board_id > 0)
+	{
+		$board = chaozzdb_query ("SELECT * FROM board WHERE id = $board_id");
+		if (count($board) == 0)
+			Message ($txt[11], $txt[156], true); // board not found
+		
+		// staff board but normal user?? accesss denied
+		if ($board[0]['group_id'] < $_SESSION['group_id'])
+			Message ($txt[11], $txt[48], true);
+	}
+		
+	// check topic
+	if ($topic_id > 0)
+	{	
+		$topic = chaozzdb_query ("SELECT * FROM topic WHERE id = $topic_id");
+		if (count($topic) == 0)
+			Message ($txt[11], $txt[51], true); // invalid topic
+		
+		// locked topic? accesss denied
+		if ($action == "topic.edit" || $action == "topic.save" || $action == "topic.delete" || $action == "post.edit" || $action == "post.save" || $action == "post.delete")
+			if ($topic[0]['locked'] && $_SESSION['group_id'] >= $default_group_id)
+				Message ($txt[11], $txt[48], true);
+	}
+		
+	// check post
+	if ($post_id > 0)
+	{
+		$post = chaozzdb_query ("SELECT * FROM post WHERE id = $post_id");
+		if (count($post) == 0)
+			Message ($txt[11], $txt[52], true); // invalid toppostic
+	}		
+	
+	if ($action == "topic.move") 
+	{
+		// if board_id = 0 error
+		$result = chaozzdb_query ("UPDATE topic SET board_id = $board_id WHERE id = $topic_id");
+		Message ($txt[22], $txt[50], true);
+	}
+	
+	if ($action == "topic.delete") 
+	{
+		// not your topic, or you can not delete your own topic is set, and you're not staff? access denied
+		if (($topic[0]['user_id'] != $_SESSION['user_id'] || intval($settings[0]['delete_own_topics']) == 0) && $_SESSION['group_id'] == $default_group_id)
+			Message ($txt[11], $txt[48], true);
+
+		$board_id = intval($topic[0]['board_id']);
+		chaozzdb_query ("DELETE FROM post WHERE topic_id = $topic_id");
+		chaozzdb_query ("DELETE FROM topic WHERE id = $topic_id");
+		
+		include($lang_file); // update lang file with board_id
+		Message ($txt[22], $txt[59], true);
+	}
+	
+	
+	if ($action == "topic.edit") 
+	{
+		// trying to edit not your own post when not and admin/mod
+		if ($_SESSION['user_id'] != $topic[0]['user_id'] && $_SESSION['group_id'] == $default_group_id) 
+			Message($txt[11], $txt[49], true);
+		
+		// let's check if you are within the editing limits, -1 means edit unlimited
+		if ($_SESSION['group_id'] >= $default_group_id)
+		{
+			$edit_limit = $settings[0]['edit_limit'];
+			if (MinutesDiff($now, $topic[0]['create_date']) > $edit_limit)
+				Message ($txt[11], $txt[123].$settings[0]['edit_limit'].$txt[129], true);
+		}
+		
+		$post = chaozzdb_query ("SELECT * FROM post WHERE topic_id = $topic_id");
+		if (count($post) == 0)
+			Message ($txt[11], $txt[52], true);
+
+		$post_id = intval($post[0]['id']);
+		$post[0]['name'] = br2nl(urldecode($post[0]['name'])); // convert <br> to newline for the text area in the form
+		$caption = $txt[69];
+		$post_action = "topic.save";
+	}
+	
+	if ($action == "post.edit") 
+	{	
+		// trying to edit not your own post when not and admin/mod
+		if ($_SESSION['user_id'] != $post[0]['user_id'] && $_SESSION['group_id'] == $default_group_id) 
+			Message($txt[11], $txt[49], true);
+		
+		// let's check if you are within the editing limits, -1 means edit unlimited
+		if ($_SESSION['group_id'] >= $default_group_id)
+		{
+			$edit_limit = $settings[0]['edit_limit'];
+				if (MinutesDiff($now, $post[0]['create_date']) > $edit_limit)
+					Message ($txt[11], $txt[123].$settings[0]['edit_limit'].$txt[129], true);
+		}
+		
+		$post_id = intval($post[0]['id']);
+		$topic_id = intval($post[0]['topic_id']);
+		$post[0]['name'] = br2nl(urldecode($post[0]['name'])); // convert <br> to newline for the text area in the form
+		$caption = $txt[70];
+		$post_action = "post.save";
+
+		$topic = chaozzdb_query ("SELECT * FROM topic WHERE id = $topic_id");
+		if (count($topic) == 0)
+			Message ($txt[11], $txt[51], true);
+
+	}
+		
+	if ($action == "topic.add") 
+	{
+		$caption = $txt[119];
+		$post_action = "topic.save";
+	}
+	
+	if ($action == "post.add") 
+	{
+		$caption = $txt[120];
+		$post_action = "post.save";
+	}
+	
+	if ($action == "topic.save") 
+	{
+		if (empty($_POST['title']) || empty($_POST['postmessage'])) 
+			Message($txt[11], $txt[53], true);
+
+		$save['topic_id'] = $topic_id;
+		$save['topic_title'] = urlencode($_POST['title']);
+		$save['post_message'] = urlencode($_POST['postmessage']);
+		
+		// check title length
+		if (strlen($save['topic_title']) < 1 || strlen($save['topic_title']) > intval($settings[0]['max_title_length']))
+			Message ($txt[11], $txt[152], true);
+		
+		// check post length
+		if (strlen($save['post_message']) < 1 || strlen($save['post_message']) > intval($settings[0]['max_post_length']))
+			Message ($txt[11], $txt[153], true);
+		
+		if ($topic_id == 0) 
+		{
+			$topic_id = chaozzdb_query ("INSERT INTO topic VALUES ({$save['topic_title']}, $user_id, $board_id, 0, 0, $now, $now, {$_SESSION['name']})"); // create topic
+			$result = chaozzdb_query ("INSERT INTO post VALUES ({$save['post_message']}, $topic_id, $user_id, $now, 0)"); // and add the post
+			include($lang_file); // update lang file with new topic id
+			Message ($txt[22], $txt[54], true);
+		}
+		else 
+		{
+			$result = chaozzdb_query ("UPDATE topic SET name = {$save['topic_title']} WHERE id = $topic_id");
+			$result = chaozzdb_query ("UPDATE post SET name = {$save['post_message']}, update_date = $now WHERE id = $post_id");
+			Message ($txt[22], $txt[55], true);
+		}
+	}
+	
+	if ($action == "post.save") 
+	{
+		if (empty($_POST['postmessage'])) 
+			Message($txt[11], $txt[56], true);
+
+		$save['post_message'] = urlencode($_POST['postmessage']);
+		
+		// check post length
+		if (strlen($save['post_message']) < 1 || strlen($save['post_message']) > intval($settings[0]['max_post_length']))
+			Message ($txt[11], $txt[153], true);
+		
+		if ($post_id == 0) 
+		{
+			$result = chaozzdb_query ("INSERT INTO post VALUES ({$save['post_message']}, $topic_id, $user_id, $now, 0)"); // and add the post
+			$result = chaozzdb_query ("UPDATE topic SET update_date = $now, last_poster = {$_SESSION['name']} WHERE id = $topic_id"); // update the topic
+			Message ($txt[22], $txt[57], true);
+		}
+		else 
+		{
+			$result = chaozzdb_query ("UPDATE post SET name = {$save['post_message']}, update_date = $now WHERE id = $post_id");
+			Message ($txt[22], $txt[58], true);
+		}
+	}
+	
+	if ($action == "post.delete") 
+	{
+		// not your post, or you can not delete your own post is set, and you're not staff? access denied
+		if (($post[0]['user_id'] != $_SESSION['user_id'] || intval($settings[0]['delete_own_posts']) == 0) && $_SESSION['group_id'] == $default_group_id)
+			Message($txt[11], $txt[49], true);
+
+		$result = chaozzdb_query ("DELETE FROM post WHERE id = $post_id");
+		Message ($txt[22], $txt[60], true);
+	}
+	
+	if ($action == "topic.lock" || $action == "topic.unlock") 
+	{
+		if ($action == "topic.lock") $locked = 1;
+		else $locked = 0;
+		
+		$result = chaozzdb_query ("UPDATE topic SET locked = $locked WHERE id = $topic_id");
+
+		if ($action == "topic.lock") 
+			Message ($txt[22], $txt[62], true);
+		else 
+			Message ($txt[22], $txt[64], true);
+	}
+	
+	if ($action == "topic.sticky" || $action == "topic.unsticky") {
+		if ($action == "topic.sticky") $sticky = 1;
+		else $sticky = 0;
+		
+		$result = chaozzdb_query ("UPDATE topic SET sticky = $sticky WHERE id = $topic_id");
+
+		if ($action == "topic.sticky") 
+			Message ($txt[22], $txt[66], true);
+		else 
+			Message ($txt[22], $txt[68], true);
+	}
+	
+?>	
+	<table class="datatable" width="60%">
+		<caption><?php echo $caption; ?></caption>
+		<form method="POST" action="index.php?page=post" name="postform">
+<?php
+		if ($action == "topic.add" || $action == "post.add")
+		{
+			$topic[0]['name'] = "";
+			$post[0]['name'] = "";
+		}
+		
+		if ($action == "topic.edit" || $action == "topic.add") 
+		{
+			echo "<tr><th>".$txt[71]."</th><td class=\"post\">";
+			echo "<input type=\"text\" size=\"70\" maxlength=\"".intval($settings[0]['max_title_length'])."\" name=\"title\" value=\"".urldecode($topic[0]['name'])."\" autofocus></td></tr>";
+		}
+?>		
+			<input type="hidden" name="action" value="<?php echo $post_action; ?>">
+			<input type="hidden" name="board_id" value="<?php echo $board_id; ?>">
+			<input type="hidden" name="topic_id" value="<?php echo $topic_id; ?>">
+			<input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
+		<tr><th><?php echo $txt[72]; ?></th>
+		<td class="post">
+			<a href="javascript:void(0);" onclick="replaceText(' :)', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/smiley.gif" border="0" alt="insert smiley" /></a>
+			<a href="javascript:void(0);" onclick="replaceText(' ;)', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/wink.gif" border="0" alt="insert smiley" /></a>
+			<a href="javascript:void(0);" onclick="replaceText(' :P', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/tongue.gif" border="0" alt="insert smiley" /></a>
+			<a href="javascript:void(0);" onclick="replaceText(' :D', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/grin.gif" border="0" alt="insert smiley" /></a>
+			<a href="javascript:void(0);" onclick="replaceText(' 8)', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/cool.gif" border="0" alt="insert smiley" /></a>
+			<a href="javascript:void(0);" onclick="replaceText(' :(', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/sad.gif" border="0" alt="insert smiley" /></a>
+			<a href="javascript:void(0);" onclick="replaceText(' o0', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/blink.gif" border="0" alt="insert smiley" /></a>
+			<a href="javascript:void(0);" onclick="replaceText(' :@', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/angry.gif" border="0" alt="insert smiley" /></a>
+			<a href="javascript:void(0);" onclick="surroundText('[b]', '[/b]', document.forms.postform.postmessage); return false;"><img src="gfx/bold.gif" border="0" alt="bold" /></a>
+			<a href="javascript:void(0);" onclick="surroundText('[u]', '[/u]', document.forms.postform.postmessage); return false;"><img src="gfx/underline.gif" border="0" alt="underline" /></a>
+			<a href="javascript:void(0);" onclick="surroundText('[i]', '[/i]', document.forms.postform.postmessage); return false;"><img src="gfx/italicize.gif" border="0" alt="italic" /></a>
+			<a href="javascript:void(0);" onclick="surroundText('[s]', '[/s]', document.forms.postform.postmessage); return false;"><img src="gfx/strike.gif" border="0" alt="strike out" /></a>
+			<a href="javascript:void(0);" onclick="surroundText('[url]', '[/url]', document.forms.postform.postmessage); return false;"><img src="gfx/url.gif" border="0" alt="insert url" /></a>
+			<a href="javascript:void(0);" onclick="surroundText('[img]', '[/img]', document.forms.postform.postmessage); return false;"><img src="gfx/img.gif" border="0" alt="insert image" /></a>
+			<a href="javascript:void(0);" onclick="surroundText('[quote]', '[/quote]', document.forms.postform.postmessage); return false;"><img src="gfx/quote.gif" border="0" alt="insert quote" /></a><br>
+			<textarea name="postmessage" cols="75" rows="15" maxlength="<?php echo intval($settings[0]['max_post_length']); ?>"><?php echo urldecode($post[0]['name']); ?></textarea>
+		</td></tr>			
+		<tr><td colspan="2" class="altpost">
+			<div align="center"><input type="submit" value="<?php echo $txt[73]; ?>"></div>
+		</td></tr>
+	</table>	
