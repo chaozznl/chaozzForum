@@ -12,10 +12,12 @@ How to start using chaozzForum:
 * done! you can start using the forum. the options are self explanatory.
 
 See licence.txt for more details about this product's licence.
+
 If you find it useful, perhaps you can show appreciation by making a small donation.
+
 If you have questions or suggestions, contact me.
+
 For support visit the forum (of course running on chaozzForum).
 
-https://chaozz.nl
-
-https://chaozz.nl/fubarForum
+* https://chaozz.nl
+* https://chaozz.nl/fubarForum
