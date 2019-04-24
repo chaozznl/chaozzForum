@@ -1,6 +1,6 @@
-chaozzForum - a lightweight, simple forum using a flatfile database engine
+##chaozzForum - a lightweight, simple forum using a flatfile database engine##
 
-by Elmar Wenners, The Netherlands, 2019
+#by Elmar Wenners, The Netherlands, 2019#
 
 How to start using chaozzForum:
 
