@@ -153,4 +153,5 @@
 	$txt[155] = "Also delete his posts and topics";
 	$txt[156] = "Board not found";
 	$txt[157] = "Category not found";
+	$txt[158] = "Description";
 ?>
