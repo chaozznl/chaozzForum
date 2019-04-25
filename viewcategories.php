@@ -53,7 +53,8 @@
 				echo "<td width=\"*\" class=\"post\"><a href=\"index.php?page=viewboard&board_id=".intval($board[$j]['id'])."\">".urldecode($board[$j]['name']);
 				if (intval($board[$j]['hidden']) == "2") echo " <em>(".$txt[32].")</em>";
 				if (intval($board[$j]['readonly']) == "2") echo " <em>(".$txt[31].")</em>";
-				echo "</a></td>";
+				echo "</a>";
+				echo "<br><small>".urldecode($board[$j]['description'])."</small></td>";
 				
 				// topic count, last post info
 				echo "<td width=\"100\" class=\"altpost\"><small>".$num_topics." ".$txt[36]."<br />".$num_posts." ".$txt[37]."</small></td>";

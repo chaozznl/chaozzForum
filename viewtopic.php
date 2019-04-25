@@ -153,11 +153,12 @@
 		{
 			echo '	<form method="POST" action="index.php?page=post">
 						<input type="hidden" name="action" value="topic.move">
-						<select name="category_name" style="direction: rtl;">';
+						<input type="hidden" name="topic_id" value="'.$topic[0]['id'].'">
+						<select name="board_id">';
 					
 					for ($i = 0; $i < count($board); $i++)
 						echo '<option value="'.intval($board[$i]['id']).'">'.urldecode($board[$i]['name']).'</option>';
-			echo '		<input type="submit" value="move" style="direction: rtl;">
+			echo '		<input type="submit" value="move">
 					</form>';
 		}
 		if (intval($topic[0]['locked']) == 0) 

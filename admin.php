@@ -37,6 +37,7 @@
 	if ($action == "board.add" || $action == "board.update") 
 	{
 		$board['name'] = !empty($_POST['board_name']) ? urlencode($_POST['board_name']) : "";
+		$board['description'] = !empty($_POST['board_description']) ? urlencode($_POST['board_description']) : "";
 		$board['board_order'] = !empty($_POST['board_order']) ? intval($_POST['board_order']) : 0;
 		$board['group_id'] = !empty(intval($_POST['group_id'])) ? intval($_POST['group_id']) : $default_group_id;
 		$board['readonly'] = !empty($_POST['readonly']) ? intval($_POST['readonly']) : 0;
@@ -48,12 +49,12 @@
 	
 		if ($action == "board.add") 
 		{
-			chaozzdb_query ("INSERT INTO board VALUES {$board['name']}, $category_id, {$board['board_order']}, {$board['group_id']}, {$board['readonly']}, {$board['hidden']}");
+			chaozzdb_query ("INSERT INTO board VALUES {$board['name']}, {$board['description']}, $category_id, {$board['board_order']}, {$board['group_id']}, {$board['readonly']}, {$board['hidden']}");
 			Message ($txt[22], $txt[4], false);
 		}
 		else
 		{
-			chaozzdb_query ("UPDATE board SET name = {$board['name']}, category_id = $category_id, board_order = {$board['board_order']}, group_id = {$board['group_id']}, readonly = {$board['readonly']}, hidden = {$board['hidden']} WHERE id = $board_id");
+			chaozzdb_query ("UPDATE board SET name = {$board['name']}, description = {$board['description']}, category_id = $category_id, board_order = {$board['board_order']}, group_id = {$board['group_id']}, readonly = {$board['readonly']}, hidden = {$board['hidden']} WHERE id = $board_id");
 			Message ($txt[22], $txt[5], false);
 		}
 	}
@@ -207,6 +208,7 @@
 							<input type="hidden" name="action" value="board.update">
 							<input type="hidden" name="board_id" value="'.intval($board[$j]['id']).'">
 							'.$txt[24].' <input type="text" name="board_name" size="50" maxlength="50" value="'.urldecode($board[$j]['name']).'"><br />
+							'.$txt[158].' <input type="text" name="board_description" size="50" maxlength="250" value="'.urldecode($board[$j]['description']).'"><br />
 							'.$txt[26].' <input type="text" name="board_order" size="2" maxlength="2" value="'.intval($board[$j]['board_order']).'"><br />
 							'.$txt[29];
 							FillPulldown("category", "category_id", intval($board[$j]['category_id']));
@@ -265,6 +267,7 @@
 							<form method="POST" action="index.php?page=admin">
 								<input type="hidden" name="action" value="board.add">
 								'.$txt[24].' <input type="text" name="board_name" size="50" maxlength="50" value=""><br />
+								'.$txt[158].' <input type="text" name="board_category" size="50" maxlength="250" value=""><br />
 								'.$txt[26].' <input type="text" name="board_order" size="2" maxlength="2" value=""><br />
 								'.$txt[29];
 								FillPulldown("category", "category_id", 1); // default category is 1
