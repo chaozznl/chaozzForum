@@ -1,7 +1,0 @@
-chaozzForum 1.1
-* changed forum URLs (topic => topic_id, user => user_id, etc)
-* fixed bug where you could not create new boards
-
-chaozzForum 1.0
-* complete rewrite of the old FubarForum
-* first public release
