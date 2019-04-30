@@ -82,7 +82,7 @@
 			@unlink ($db_filename."_");					// it might exist if a previous deletion failed (@ surpresses any errors)
 			rename ($db_filename, $db_filename."_");		// lock the table
 			
-			$db_file = @fopen($db_filename."_",'r'); 	// cursor in beginning of file, read-only
+			$db_file = fopen($db_filename."_",'r'); 	// cursor in beginning of file, read-only
 		}
 
 		// ------------------------
@@ -107,7 +107,7 @@
 			@unlink ($db_filename."_");					// it might exist if a previous deletion failed (@ surpresses any errors)
 			rename ($db_filename, $db_filename."_");		// lock the table
 			
-			$db_file = @fopen($db_filename."_",'r'); 	// cursor in beginning of file, read-only
+			$db_file = fopen($db_filename."_",'r'); 	// cursor in beginning of file, read-only
 		}	
 		
 		// ------------------------
@@ -138,7 +138,7 @@
 			@unlink ($db_filename."_");					// it might exist if a previous deletion failed (@ surpresses any errors)
 			rename ($db_filename, $db_filename."_");		// lock the table
 			
-			$db_file = @fopen($db_filename."_",'r'); 	// cursor in beginning of file, read-only			
+			$db_file = fopen($db_filename."_",'r'); 	// cursor in beginning of file, read-only			
 		}
 		
 		// ------------------------
@@ -198,7 +198,7 @@
 			
 			// OPEN TABLE
 			$db_filename = $chaozzdb_location.$query_table.$chaozzdb_extension; // open the table
-			$db_file = @fopen ($db_filename, "r"); // cursor in beginning of file, read-write
+			$db_file = fopen ($db_filename, "r"); // cursor in beginning of file, read-write
 		}
 		
 		// FAILED TO OPEN TABLE!!! EXIT
@@ -312,7 +312,7 @@
 								if ($record_array[$a][$where_field] > $where_value) $matches_where_condition = true;
 								break;
 							case "~=":
-								if (strpos($record_array[$a][$where_field], $where_value) !== false) $matches_where_condition = true;
+								if (stripos($record_array[$a][$where_field], $where_value) !== false) $matches_where_condition = true;
 								break;
 						}
 					}
@@ -379,7 +379,7 @@
 		// LETS WRITE THE CHANGED TABLE
 		if ($query_action == "DELETE" || $query_action == "INSERT" || $query_action == "UPDATE") 
 		{
-			$db_file = @fopen ($db_filename, "w");
+			$db_file = fopen ($db_filename, "w");
 			fwrite($db_file, $header."\r\n"); // write header, containing field names. no need for PHP_EOL because we didn't strip it from the original header we read
 			
 			// SORT THE ARRAY BY ID DESCENDING BEFORE WRITING IT TO THE TABLE. NEWEST RECORD ON TOP. THIS IS IDEAL FOR AUTO INCREMENTS
