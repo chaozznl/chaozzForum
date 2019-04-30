@@ -1,15 +1,25 @@
 <?php if (!$called_from_index) Message ($txt[11], $txt[48], true); ?>
+			<div class="columns">		
+				<div class="column col-9 col-sm-12 col-mx-auto">
+					<?php echo urldecode($settings[0]['forum_name']); ?>
+				</div>
+			</div>
+			<div class="columns">		
+				<div class="column col-9 col-sm-12 col-mx-auto div-outline">
 <?php
-	echo "<table class=\"datatable\" width=\"80%\">";
-	echo "<caption><img src=\"gfx/nav.gif\" /> ".urldecode($settings[0]['forum_name'])."</caption>";
-
 	$show_hidden = false; // don't show hidden boards
 	if (isset($_SESSION['user_id']) && $_SESSION['group_id'] <3 ) $show_hidden = true; // unless it's an admin/mod
 	
 	$category = chaozzdb_query ("SELECT * FROM category ORDER BY cat_order ASC");
 	for ($i = 0; $i < count($category); $i++)
 	{
-		echo "<tr><th colspan=\"4\" class=\"title\">".urldecode($category[$i]['name'])."</th></tr>";
+?>		
+					<div class="columns">		
+						<div class="column col-12 div-title">
+							<i class="fas fa-folder-open fa-iconsize"></i> <?php echo urldecode($category[$i]['name']); ?>
+						</div>
+					</div>
+<?php			
 		$board = chaozzdb_query ("SELECT * FROM board WHERE category_id = {$category[$i]['id']} ORDER BY board_order ASC");
 		if (count($board) == 0) { }
 		else 
@@ -44,33 +54,67 @@
 				}	
 				
 				// board type
-				echo "<tr><td width=\"50\" class=\"altpost\">";
-				if (intval($board[$j]['readonly']) == "2") echo "<img src=\"gfx/readonly.gif\" />";
-				else echo "<img src=\"gfx/normal.gif\" />";
-				echo "</td>";
+?>				
+					<div class="columns">		
+						<!-- hidden / read only //-->
+						<div class="column col-1 col-sm-2 div-center div-content-left">
+<?php								
+				if (intval($board[$j]['readonly']) == 1) 
+					echo '<i class="fas fa-lock fa-normalsize"></i>';
+				else 
+					echo  '<i class="fas fa-file-alt fa-normalsize"></i>';
+?>				
+						</div>
+					
+						<!-- board name and description //-->
+						<div class="column col-6 col-sm-5 div-content">
+							<a href="index.php?page=viewboard&board_id=<?php echo intval($board[$j]['id']); ?>"><?php echo urldecode($board[$j]['name']); ?>
+<?php									
+				if (intval($board[$j]['hidden']) == 1) echo ' <em>('.$txt[32].')</em>';
+				if (intval($board[$j]['readonly']) == 1) echo ' <em>('.$txt[31].')</em>';
+?>
+							</a>
+							<br><?php echo urldecode($board[$j]['description']); ?>
+						</div>
 				
-				// hidden/readonly
-				echo "<td width=\"*\" class=\"post\"><a href=\"index.php?page=viewboard&board_id=".intval($board[$j]['id'])."\">".urldecode($board[$j]['name']);
-				if (intval($board[$j]['hidden']) == "2") echo " <em>(".$txt[32].")</em>";
-				if (intval($board[$j]['readonly']) == "2") echo " <em>(".$txt[31].")</em>";
-				echo "</a>";
-				echo "<br><small>".urldecode($board[$j]['description'])."</small></td>";
+						<!-- topic count //-->
+						<div class="column col-2 div-content">
+							<?php echo $num_topics; ?> <?php echo $txt[36]; ?><br>
+							<?php echo $num_posts; ?> <?php echo $txt[37]; ?>
+						</div>
 				
-				// topic count, last post info
-				echo "<td width=\"100\" class=\"altpost\"><small>".$num_topics." ".$txt[36]."<br />".$num_posts." ".$txt[37]."</small></td>";
-				echo "<td width=\"300\" class=\"post\"><small>".$txt[143]." <a href=\"index.php?page=viewtopic&topic_id=".$last_post_topic_id."\">".$last_post_title."</a><br />".$txt[38]." ".$last_post_user." ".$txt[39]." ".$last_post_date."</small></td></tr>";
+						<!-- last post update //-->
+						<div class="column col-3 div-content">
+							<a href="index.php?page=viewtopic&topic_id=<?php echo $last_post_topic_id; ?>"><?php echo $last_post_title; ?></a>
+							<br><?php echo $txt[38]; ?> <?php echo $last_post_user; ?> <?php echo $txt[39]; ?> <?php echo $last_post_date; ?>
+						</div>
+					</div>
+<?php					
 			}
 		}
 		
 	}
-	echo "</table>";
-	echo "<br />";
-	echo "<br />";
-	echo  "<table class=\"datatable\" width=\"80%\">";
-	echo "<caption>".$txt[40]."</caption>";
-	echo "<tr><td width=\"50\" class=\"altpost\"><img src=\"gfx/info.gif\" /></td>";
-	echo "<td width=\"*\" class=\"post\">";
-	
+?>	
+				</div>
+			</div>	
+			<br>
+			<!-- forum stats //-->
+			<div class="columns">		
+				<div class="column col-9 col-sm-12 col-mx-auto div-outline">
+					<div class="columns">		
+						<div class="column col-12 div-title">
+							<?php echo $txt[40]; ?>
+						</div>
+					</div>	
+					
+					<div class="columns">		
+						<div class="column col-12 col-mx-auto">
+							<div class="columns">		
+								<div class="column col-1 col-sm-2 div-center div-content-left">
+									<i class="fas fa-chart-pie fa-normalsize"></i>
+								</div>
+								<div class="column col-11 col-sm-10 col-sm-10 div-content">
+<?php	
 	// last member
 	$user = chaozzdb_query ("SELECT id, name FROM user ORDER BY id DESC");
 	if (count($user) == 0) 
@@ -83,18 +127,22 @@
 		$last_member = urldecode($user[0]['name']); 
 		$num_members = count($user);
 	}	
-	echo $txt[41].": <strong>".$last_member."</strong><br />";
-	echo $txt[117].": <strong>".$num_members."</strong><br />";
+	echo $txt[41].': <span class="div-label">'.$last_member.'</span><br />';
+	echo $txt[117].': <span class="div-label">'.$num_members.'</span><br />';
 	
 	// total topics
 	$topic = chaozzdb_query ("SELECT id FROM topic");
 	$num_topics = count($topic);
-	echo $txt[42].": <strong>".$num_topics."</strong><br />";
+	echo $txt[42].': <span class="div-label">'.$num_topics.'</span><br />';
 	
 	// total posts (-topics)
 	$post = chaozzdb_query ("SELECT id, name FROM post");
 	$num_posts = count($post)-$num_topics; 
-	echo $txt[43].": <strong>".$num_posts."</strong><br />";
-	echo "</td></tr>";
-	echo "</table>";
+	echo $txt[43].': <span class="div-label">'.$num_posts.'</span><br />';
 ?>	
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>	

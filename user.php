@@ -10,7 +10,8 @@
 	}
 	
 	// login
-    if ($action == "login") {
+    if ($action == "login") 
+	{
 		$name = !empty($_POST['name']) ? urlencode($_POST['name']) : "";
 		$pass = !empty($_POST['pass']) ? chaozzdb_password($_POST['pass']) : "";
 		$captcha = !empty($_POST['captcha']) ? $_POST['captcha'] : "";
@@ -42,17 +43,39 @@
 		 // captcha
 		include("./includes/simple-php-captcha.php");
 		$_SESSION['captcha'] = simple_php_captcha();
-	    echo '
-		<form method="POST" action="index.php?page=user">
-		<input type="hidden" name="action" value="login">
-		<table border="0" class="datatable" width="40%">
-			<caption>'.$txt[104].'</caption>
-			<tr><th>'.$txt[85].'</th><td class="post"><input type="text" name="name" size="20" maxlength="20" autofocus></td></tr>
-			<tr><th>'.$txt[87].'</th><td class="post"><input type="password" name="pass" size="20" maxlength="20"></td></tr>
-			<tr><th>'.$txt[88].'</ht><td class="post"><img src="'.$_SESSION['captcha']['image_src'].'" align="middle" /><br>
-					<input type="text" name="captcha" size="6" maxlength="6"></td></tr>					
-			<tr><td colspan="2" class="altpost"><div align="center"><input type="submit" value="'.$txt[105].'"></div></td></tr>
-		</form> 
-		</table>';
+?>
+
+			<div class="columns">		
+				<div class="column col-5 col-sm-12 col-mx-auto">
+					<div class="columns">		
+						<div class="column col-12 div-title">
+							<?php echo $txt[104]; ?>
+						</div>
+					</div>
+					<div class="columns">		
+						<div class="column col-12 div-content">					
+							<form method="POST" action="index.php?page=user">
+								<input type="hidden" name="action" value="login">
+								<span class="div-label"><?php echo $txt[85]; ?><span>
+								<br>
+								<input type="text" name="name" maxlength="20" autofocus>
+								<br>
+								<span class="div-label"><?php echo $txt[87]; ?></span>
+								<br>
+								<input type="password" name="pass" maxlength="20">
+								<br>
+								<span class="div-label"><?php echo $txt[88]; ?></span>
+								<br>
+								<img src="<?php echo $_SESSION['captcha']['image_src']; ?>">
+								<br>
+								<input type="text" name="captcha" maxlength="6">
+								<br>								
+								<input type="submit" value="<?php echo $txt[105]; ?>">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>	
+<?php
 	}
 ?>

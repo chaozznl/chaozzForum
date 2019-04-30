@@ -125,42 +125,99 @@
 	}
 	else 
 	{
-		echo '	
-		<table class="datatable" width="70%">
-			<form method="POST" action="index.php?page=admin">
-				<input type="hidden" name="action" value="save.settings">
-				<caption>'.$txt[13].'</caption>
-				<tr><th>'.$txt[14].'</th><td class="post"><input type="text" name="forum_title" size="40" maxlength="40" value="'.urldecode($settings[0]['forum_name']).'"></td></tr>
-				<tr><th>'.$txt[15].'</th><td class="post"><input type="text" name="forum_url" size="60" maxlength="60" value="'.urldecode($settings[0]['url']).'"></td></tr>
-				<tr><th>'.$txt[17].'</th><td class="post">'; FillPullDown("option", "maintenance_mode", intval($settings[0]['maintenance_mode'])); echo'</td></tr>
-				<tr><th>'.$txt[18].'</th><td class="post"><input type="text" name="topics_per_page" size="3" maxlength="3" value="'.intval($settings[0]['topics_per_page']).'"></td></tr>
-				<tr><th>'.$txt[19].'</th><td class="post"><input type="text" name="posts_per_page" size="3" maxlength="3" value="'.intval($settings[0]['posts_per_page']).'"></td></tr>
-				<tr><th>'.$txt[121].'</th><td class="post"><input type="text" name="edit_limit" size="3" maxlength="3" value="'.intval($settings[0]['edit_limit']).'"></td></tr>
-				<tr><th>'.$txt[146].'</th><td class="post"><input type="text" name="max_username_length" size="3" maxlength="3" value="'.intval($settings[0]['max_username_length']).'"></td></tr>
-				<tr><th>'.$txt[147].'</th><td class="post"><input type="text" name="max_signature_length" size="3" maxlength="3" value="'.intval($settings[0]['max_signature_length']).'"></td></tr>
-				<tr><th>'.$txt[148].'</th><td class="post"><input type="text" name="max_title_length" size="3" maxlength="3" value="'.intval($settings[0]['max_title_length']).'"></td></tr>
-				<tr><th>'.$txt[149].'</th><td class="post"><input type="text" name="max_post_length" size="3" maxlength="3" value="'.intval($settings[0]['max_post_length']).'"></td></tr>
-				<tr><th>'.$txt[112].'</th><td class="post"><select name="language">';
-					if ($dir = @opendir('./lang')) {
-						while (($file = readdir($dir)) !== false) {
-							if ($file != "." && $file != ".." && $file != "index.php") {
-								echo "<option value=\"".$file."\"";
-								if ($file == urldecode($settings[0]['language'])) { echo " selected"; }
-								echo ">".$file;
-							}
-						}	  
-						closedir($dir);
-					}
-				echo '</select></td></tr>
-				<tr><th>'.$txt[116].'</th><td class="post"><input type="text" name="news" size="50" maxlength="150" value="'.urldecode($settings[0]['news']).'"></td></tr>
-				<tr><th>'.$txt[98].'</th><td class="post">'; FillPullDown("option", "guest_view", intval($settings[0]['guest_view'])); echo'</td></tr>
-				<tr><th>'.$txt[141].'</th><td class="post">'; FillPullDown("option", "delete_own_topics", intval($settings[0]['delete_own_topics'])); echo'</td></tr>
-				<tr><th>'.$txt[142].'</th><td class="post">'; FillPullDown("option", "delete_own_posts", intval($settings[0]['delete_own_posts'])); echo'</td></tr>
-				<tr><td colspan="2" class="altpost"><div align="center"><input type="submit" value="'.$txt[21].'"></div></td></tr>
-			</form>
-		</table>
-		<br />
-		<br />';
+?>		
+			<div class="columns">		
+				<div class="column col-5 col-sm-12 col-mx-auto div-outline">
+					<div class="columns">		
+						<div class="column col-12 div-title">
+							<?php echo $txt[13]; ?>
+						</div>	
+					</div>	
+					<div class="columns">		
+						<div class="column col-12 div-content">
+							<form method="POST" action="index.php?page=admin">
+								<input type="hidden" name="action" value="save.settings">
+								<span class="div-label"><?php echo $txt[14]; ?></span>
+								<br>
+								<input type="text" name="forum_title" maxlength="40" value="<?php echo urldecode($settings[0]['forum_name']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[15]; ?></span>
+								<br>
+								<input type="text" name="forum_url"  maxlength="60" value="<?php echo urldecode($settings[0]['url']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[17]; ?></span>
+								<br>
+								<?php FillPullDown("option", "maintenance_mode", intval($settings[0]['maintenance_mode'])); ?>
+								<br>
+								<span class="div-label"><?php echo $txt[18]; ?></span>
+								<br>
+								<input type="text" name="topics_per_page" maxlength="3" value="<?php echo intval($settings[0]['topics_per_page']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[19]; ?></span>
+								<br>
+								<input type="text" name="posts_per_page" maxlength="3" value="<?php echo intval($settings[0]['posts_per_page']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[121]; ?></span>
+								<br>
+								<input type="text" name="edit_limit" maxlength="3" value="<?php echo intval($settings[0]['edit_limit']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[146]; ?></span>
+								<br>
+								<input type="text" name="max_username_length" maxlength="3" value="<?php echo intval($settings[0]['max_username_length']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[147]; ?></span>
+								<br>
+								<input type="text" name="max_signature_length" maxlength="3" value="<?php echo intval($settings[0]['max_signature_length']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[148]; ?></span>
+								<br>
+								<input type="text" name="max_title_length" maxlength="3" value="<?php echo intval($settings[0]['max_title_length']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[149]; ?></span>
+								<br>
+								<input type="text" name="max_post_length" maxlength="3" value="<?php echo intval($settings[0]['max_post_length']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[112]; ?></span>
+								<br>
+								<select name="language">
+<?php								
+	if ($dir = @opendir('./lang')) {
+		while (($file = readdir($dir)) !== false) {
+			if ($file != "." && $file != ".." && $file != "index.php") {
+				echo "<option value=\"".$file."\"";
+				if ($file == urldecode($settings[0]['language'])) { echo " selected"; }
+				echo ">".$file;
+			}
+		}	  
+		closedir($dir);
+	}
+?>
+								</select>
+								<br>
+								<span class="div-label"><?php echo $txt[116]; ?></span>
+								<br>
+								<input type="text" name="news" maxlength="150" value="<?php echo urldecode($settings[0]['news']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[98]; ?></span>
+								<br>
+								<?php FillPullDown("option", "guest_view", intval($settings[0]['guest_view'])); ?>
+								<br>
+								<span class="div-label"><?php echo $txt[141]; ?></span>
+								<br>
+								<?php FillPullDown("option", "delete_own_topics", intval($settings[0]['delete_own_topics'])); ?>
+								<br>
+								<span class="div-label"><?php echo $txt[142]; ?></span>
+								<br>
+								<?php FillPullDown("option", "delete_own_posts", intval($settings[0]['delete_own_posts'])); ?>
+								<br>
+								<input type="submit" value="<?php echo $txt[21]; ?>">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>	
+			<br>
+<?php		
 	}
 	
 	$category = chaozzdb_query ("SELECT * FROM category ORDER BY cat_order ASC");
@@ -170,124 +227,193 @@
 	}
 	else 
 	{
-		echo '
-			<table class="datatable" width="70%">
-				<caption>'.$txt[25].'</caption>';
+?>
+			<div class="columns">		
+				<div class="column col-5 col-sm-12 col-mx-auto div-outline">
+					<div class="columns">		
+						<div class="column col-12 div-title">
+							<?php echo $txt[25]; ?>
+						</div>
+					</div>
+<?php					
 		for ($i = 0; $i < count($category); $i++)
 		{
-			echo '
-				<tr><th colspan="2">'.urldecode($category[$i]['name']).'</th><td class="post">
-					<form method="POST" action="index.php?page=admin">
-						<input type="hidden" name="action" value="category.update">
-						<input type="hidden" name="category_id" value="'.intval($category[$i]['id']).'">
-						'.$txt[24].' <input type="text" name="cat_name" size="50" maxlength="50" value="'.urldecode($category[$i]['name']).'"><br />
-						'.$txt[26].' <input type="text" name="cat_order" size="2" maxlength="2" value="'.intval($category[$i]['cat_order']).'"><br>
-						<input type="submit" value="'.$txt[27].'">
-					</form>	
-					<form method="POST" action="index.php?page=admin">
-						<input type="hidden" name="action" value="category.delete">
-						<input type="hidden" name="category_id" value="'.intval($category[$i]['id']).'">
-						<input type="submit" value="'.$txt[28].'">
-					</form>	
-				</td></tr>
-				';
-			
+?>
+					<div class="columns">		
+						<div class="column col-12 div-title">
+							<?php echo urldecode($category[$i]['name']); ?>
+						</div>
+					</div>
+					<div class="columns">		
+						<div class="column col-12 div-content">
+							<form method="POST" action="index.php?page=admin">
+								<input type="hidden" name="action" value="category.update">
+								<input type="hidden" name="category_id" value="<?php echo intval($category[$i]['id']); ?>">
+								<span class="div-label"><?php echo $txt[24]; ?></span>
+								<br>
+								<input type="text" name="cat_name" maxlength="50" value="<?php echo urldecode($category[$i]['name']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[26]; ?></span>
+								<br>
+								<input type="text" name="cat_order" maxlength="2" value="<?php echo intval($category[$i]['cat_order']); ?>">
+								<br>
+								<input type="submit" value="<?php echo $txt[27]; ?>">
+							</form>	
+							<form method="POST" action="index.php?page=admin">
+								<input type="hidden" name="action" value="category.delete">
+								<input type="hidden" name="category_id" value="<?php echo intval($category[$i]['id']); ?>">
+								<input type="submit" value="<?php echo $txt[28]; ?>">
+							</form>	
+						</div>
+					</div>
+<?php					
 			// now the  boards
 			$board = chaozzdb_query ("SELECT * FROM board WHERE category_id = {$category[$i]['id']} ORDER BY board_order ASC");
 			if (count($board) == 0) 
 			{		
-				echo '<tr><td width="50"><img src="gfx/normal.gif" /></td><td>No boards found</td><td>&nbsp;</td></tr>'; 
+				Message ($txt[22], $txt[156], false);
 			}
 			else 
 			{
 				for ($j = 0; $j < count($board); $j++)
 				{
-					echo '
-					<tr><td width="50" class="altpost"><img src="gfx/normal.gif" /></td><td class="title">'.urldecode($board[$j]['name']).'</td><td class="post">
-						<form method="POST" action="index.php?page=admin">
-							<input type="hidden" name="action" value="board.update">
-							<input type="hidden" name="board_id" value="'.intval($board[$j]['id']).'">
-							'.$txt[24].' <input type="text" name="board_name" size="50" maxlength="50" value="'.urldecode($board[$j]['name']).'"><br />
-							'.$txt[158].' <input type="text" name="board_description" size="50" maxlength="250" value="'.urldecode($board[$j]['description']).'"><br />
-							'.$txt[26].' <input type="text" name="board_order" size="2" maxlength="2" value="'.intval($board[$j]['board_order']).'"><br />
-							'.$txt[29];
-							FillPulldown("category", "category_id", intval($board[$j]['category_id']));
-							echo '
-							<br />
-							'.$txt[30];
-							FillPulldown("group", "group_id", intval($board[$j]['group_id']));
-							echo '
-							<br />
-							'.$txt[31];
-							FillPulldown("option", "readonly", intval($board[$j]['readonly']));
-							echo '
-							<br />
-							'.$txt[32];
-							FillPulldown("option", "hidden", intval($board[$j]['hidden']));
-							echo '
-							<br>
-							<input type="submit" value="'.$txt[27].'">
-						</form>	
-						<form method="POST" action="index.php?page=admin">
-							<input type="hidden" name="action" value="board.delete">
-							<input type="hidden" name="board_id" value="'.intval($board[$j]['id']).'">
-							<input type="submit" value="'.$txt[28].'">
-						</form>	
-					</td></tr>';
+?>					
+					<div class="columns">		
+						<div class="column col-1 col-sm-2 div-center div-content-left">
+<?php								
+		if (intval($board[$j]['readonly']) == 1) 
+			echo '<i class="fas fa-lock fa-normalsize"></i>';
+		else 
+			echo  '<i class="fas fa-file-alt fa-normalsize"></i>';
+?>				
+						</div>
+						<!-- board name and description //-->
+						<div class="column col-3 col-sm-2 div-content">
+							<span class="div-label"><?php echo urldecode($board[$j]['name']); ?></span>
+						</div>
+						<div class="column col-8 div-content">
+							<form method="POST" action="index.php?page=admin">
+								<input type="hidden" name="action" value="board.update">
+								<input type="hidden" name="board_id" value="<?php echo intval($board[$j]['id']); ?>">
+								<span class="div-label"><?php echo $txt[24]; ?></span>
+								<br>
+								<input type="text" name="board_name" maxlength="50" value="<?php echo urldecode($board[$j]['name']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[158]; ?></span>
+								<br>
+								<input type="text" name="board_description" maxlength="250" value="<?php echo urldecode($board[$j]['description']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[26]; ?></span>
+								<br>
+								<input type="text" name="board_order" maxlength="2" value="<?php echo intval($board[$j]['board_order']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[29]; ?></span>
+								<br>
+								<?php FillPulldown("category", "category_id", intval($board[$j]['category_id'])); ?>
+								<br>
+								<span class="div-label"><?php echo $txt[30]; ?></span>
+								<br>
+								<?php FillPulldown("group", "group_id", intval($board[$j]['group_id'])); ?>
+								<br>
+								<span class="div-label"><?php echo $txt[31]; ?></span>
+								<br>
+								<?php FillPulldown("option", "readonly", intval($board[$j]['readonly'])); ?>
+								<br>
+								<span class="div-label"><?php echo $txt[32]; ?></span>
+								<br>
+								<?php FillPulldown("option", "hidden", intval($board[$j]['hidden'])); ?>
+								<br>
+								<input type="submit" value="<?php echo $txt[27]; ?>">
+							</form>	
+							<form method="POST" action="index.php?page=admin">
+								<input type="hidden" name="action" value="board.delete">
+								<input type="hidden" name="board_id" value="<?php echo intval($board[$j]['id']); ?>">
+								<input type="submit" value="<?php echo $txt[28]; ?>">
+							</form>	
+						</div>	
+					</div>	
+<?php					
 				}
 			}
 		}
-			
-		echo $chaozzdb_last_error;
-		echo '
-			</table>
-			<br />
-			<br />';
+?>
+				</div>
+			</div>
+<?php			
 	}
-	
-	echo '
-		<table class="datatable" width="40%">
-			<caption>'.$txt[33].'</caption>
-			<tr><td class="post">
-				<form method="POST" action="index.php?page=admin">
-					<input type="hidden" name="action" value="category.add">
-					'.$txt[24].' <input type="text" name="cat_name" size="50" maxlength="50" value=""><br />
-					'.$txt[26].' <input type="text" name="cat_order" size="2" maxlength="2" value="">
-					<input type="submit" value="'.$txt[34].'">
-				</form>	
-			</td></tr>	
-		</table>
-		<br />
-		<br />';	
-		
-	echo '
-		<table class="datatable" width="40%">
-			<caption>'.$txt[35].'</caption>
-			<tr><td class="post">
+?>	
+			<br>
+			
+			<div class="columns">		
+				<div class="column col-5 col-sm-12 col-mx-auto div-outline">
+					<div class="columns">		
+						<div class="column col-12 div-title">
+							<?php echo $txt[33]; ?>
+						</div>
+					</div>	
+					<div class="columns">		
+						<div class="column col-12 div-content">
+							<form method="POST" action="index.php?page=admin">
+								<input type="hidden" name="action" value="category.add">
+								<span class="div-label"><?php echo $txt[24]; ?></span>
+								<br>
+								<input type="text" name="cat_name" maxlength="50" value="">
+								<br>
+								<span class="div-label"><?php echo $txt[26]; ?></span>
+								<br>
+								<input type="text" name="cat_order" maxlength="2" value="">
+								<br>
+								<input type="submit" value="<?php echo $txt[34]; ?>">
+							</form>	
+						</div>
+					</div>
+				</div>
+			</div>	
+			
+			<br>
+			
+			<div class="columns">		
+				<div class="column col-5 col-sm-12 col-mx-auto div-outline">
+					<div class="columns">		
+						<div class="column col-12 div-title">
+							<?php echo $txt[35]; ?>
+						</div>
+					</div>	
+					<div class="columns">		
+						<div class="column col-12 div-content">
 							<form method="POST" action="index.php?page=admin">
 								<input type="hidden" name="action" value="board.add">
-								'.$txt[24].' <input type="text" name="board_name" size="50" maxlength="50" value=""><br />
-								'.$txt[158].' <input type="text" name="board_category" size="50" maxlength="250" value=""><br />
-								'.$txt[26].' <input type="text" name="board_order" size="2" maxlength="2" value=""><br />
-								'.$txt[29];
-								FillPulldown("category", "category_id", 1); // default category is 1
-								echo '
+								<span class="div-label"><?php echo $txt[24]; ?></span>
+								<br>
+								<input type="text" name="board_name" maxlength="50" value="">
+								<br>
+								<span class="div-label"><?php echo $txt[158]; ?></span>
+								<br>
+								<input type="text" name="board_category" maxlength="250" value="">
+								<br>
+								<span class="div-label"><?php echo $txt[26]; ?></span>
+								<br>
+								<input type="text" name="board_order" maxlength="2" value="">
+								<br>
+								<span class="div-label"><?php echo $txt[29]; ?></span>
+								<br>
+								<?php FillPulldown("category", "category_id", 1); ?> <!-- default category is 1 //-->
+								<br>
+								<span class="div-label"><?php echo $txt[30]; ?></span>
+								<br>
+								<?php FillPulldown("group", "group_id", 3); ?> <!-- default group is posters (members) //-->
 								<br />
-								'.$txt[30];
-								FillPulldown("group", "group_id", 3); // default group is posters (members)
-								echo '
-								<br />
-								'.$txt[31];
-								FillPulldown("option", "readonly", 0); // default is not readonly
-								echo '
-								<br />
-								'.$txt[32];
-								FillPulldown("option", "hidden", 0); // default is not hidden
-								echo '
-								<input type="submit" value="'.$txt[34].'">
+								<span class="div-label"><?php echo $txt[31]; ?></span>
+								<br>
+								<?php FillPulldown("option", "readonly", 0); ?> <!-- default is not readonly //-->
+								<br>
+								<span class="div-label"><?php echo $txt[32]; ?></span>
+								<br>
+								<?php FillPulldown("option", "hidden", 0); ?> <!-- default is not hidden //-->
+								<br>
+								<input type="submit" value="<?php echo $txt[34]; ?>">
 							</form>	
-			</td></tr>	
-		</table>
-		<br />
-		<br />';	
-?>
+						</div>
+					</div>
+				</div>
+			</div>	

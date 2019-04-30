@@ -43,7 +43,7 @@
 	$txt[41] = "Latest member";
 	$txt[42] = "Number of topics";
 	$txt[43] = "Number of posts";
-	$txt[44] = "Memberlist";
+	$txt[44] = "Member list";
 	$txt[45] = "Username";
 	$txt[46] = "Group";
 	$txt[47] = "Posts";
@@ -154,4 +154,17 @@
 	$txt[156] = "Board not found";
 	$txt[157] = "Category not found";
 	$txt[158] = "Description";
+	$txt[159] = "User not found";
+	$txt[160] = "Home";
+	$txt[161] = "Logout";
+	$txt[162] = "Create new topic";
+	$txt[163] = "Add a new reply";
+	$txt[164] = "Locked";
+	$txt[165] = "Pinned";
+	$txt[166] = "Delete topic";
+	$txt[167] = "Delete reply";
+	$txt[168] = "Lock topic";
+	$txt[169] = "Unlock topic";
+	$txt[170] = "Pin topic";
+	$txt[171] = "Unpin topic";
 ?>

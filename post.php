@@ -218,9 +218,16 @@
 	}
 	
 ?>	
-	<table class="datatable" width="60%">
-		<caption><?php echo $caption; ?></caption>
-		<form method="POST" action="index.php?page=post" name="postform">
+			<div class="columns">		
+				<div class="column col-5 col-sm-12 col-mx-auto">
+					<div class="columns">		
+						<div class="column col-12 div-title">
+							<?php echo $caption; ?>
+						</div>
+					</div>	
+					<div class="columns">		
+						<div class="column col-12 div-content">
+							<form method="POST" action="index.php?page=post" name="postform">
 <?php
 		if ($action == "topic.add" || $action == "post.add")
 		{
@@ -230,34 +237,30 @@
 		
 		if ($action == "topic.edit" || $action == "topic.add") 
 		{
-			echo "<tr><th>".$txt[71]."</th><td class=\"post\">";
-			echo "<input type=\"text\" size=\"70\" maxlength=\"".intval($settings[0]['max_title_length'])."\" name=\"title\" value=\"".urldecode($topic[0]['name'])."\" autofocus></td></tr>";
+?>
+							<span class="div-label"><?php echo $txt[71]; ?></span>
+							<br>
+							<input type="text" maxlength="<?php echo intval($settings[0]['max_title_length']); ?>" name="title" value="<?php echo urldecode($topic[0]['name']); ?>" autofocus>
+							<br>
+<?php							
 		}
 ?>		
-			<input type="hidden" name="action" value="<?php echo $post_action; ?>">
-			<input type="hidden" name="board_id" value="<?php echo $board_id; ?>">
-			<input type="hidden" name="topic_id" value="<?php echo $topic_id; ?>">
-			<input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
-		<tr><th><?php echo $txt[72]; ?></th>
-		<td class="post">
-			<a href="javascript:void(0);" onclick="replaceText(' :)', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/smiley.gif" border="0" alt="insert smiley" /></a>
-			<a href="javascript:void(0);" onclick="replaceText(' ;)', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/wink.gif" border="0" alt="insert smiley" /></a>
-			<a href="javascript:void(0);" onclick="replaceText(' :P', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/tongue.gif" border="0" alt="insert smiley" /></a>
-			<a href="javascript:void(0);" onclick="replaceText(' :D', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/grin.gif" border="0" alt="insert smiley" /></a>
-			<a href="javascript:void(0);" onclick="replaceText(' 8)', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/cool.gif" border="0" alt="insert smiley" /></a>
-			<a href="javascript:void(0);" onclick="replaceText(' :(', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/sad.gif" border="0" alt="insert smiley" /></a>
-			<a href="javascript:void(0);" onclick="replaceText(' o0', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/blink.gif" border="0" alt="insert smiley" /></a>
-			<a href="javascript:void(0);" onclick="replaceText(' :@', document.forms.postform.postmessage); return false;"><img src="gfx/smilies/angry.gif" border="0" alt="insert smiley" /></a>
-			<a href="javascript:void(0);" onclick="surroundText('[b]', '[/b]', document.forms.postform.postmessage); return false;"><img src="gfx/bold.gif" border="0" alt="bold" /></a>
-			<a href="javascript:void(0);" onclick="surroundText('[u]', '[/u]', document.forms.postform.postmessage); return false;"><img src="gfx/underline.gif" border="0" alt="underline" /></a>
-			<a href="javascript:void(0);" onclick="surroundText('[i]', '[/i]', document.forms.postform.postmessage); return false;"><img src="gfx/italicize.gif" border="0" alt="italic" /></a>
-			<a href="javascript:void(0);" onclick="surroundText('[s]', '[/s]', document.forms.postform.postmessage); return false;"><img src="gfx/strike.gif" border="0" alt="strike out" /></a>
-			<a href="javascript:void(0);" onclick="surroundText('[url]', '[/url]', document.forms.postform.postmessage); return false;"><img src="gfx/url.gif" border="0" alt="insert url" /></a>
-			<a href="javascript:void(0);" onclick="surroundText('[img]', '[/img]', document.forms.postform.postmessage); return false;"><img src="gfx/img.gif" border="0" alt="insert image" /></a>
-			<a href="javascript:void(0);" onclick="surroundText('[quote]', '[/quote]', document.forms.postform.postmessage); return false;"><img src="gfx/quote.gif" border="0" alt="insert quote" /></a><br>
-			<textarea name="postmessage" cols="75" rows="15" maxlength="<?php echo intval($settings[0]['max_post_length']); ?>"><?php echo urldecode($post[0]['name']); ?></textarea>
-		</td></tr>			
-		<tr><td colspan="2" class="altpost">
-			<div align="center"><input type="submit" value="<?php echo $txt[73]; ?>"></div>
-		</td></tr>
-	</table>	
+							<input type="hidden" name="action" value="<?php echo $post_action; ?>">
+							<input type="hidden" name="board_id" value="<?php echo $board_id; ?>">
+							<input type="hidden" name="topic_id" value="<?php echo $topic_id; ?>">
+							<input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
+
+							<span class="div-label"><?php echo $txt[72]; ?></div>
+							<br>							
+							<textarea name="postmessage" rows="15" maxlength="<?php echo intval($settings[0]['max_post_length']); ?>"><?php echo urldecode($post[0]['name']); ?></textarea>
+							<br>
+<?php
+		foreach($smiles as $smile=>$image)
+			echo '<a href="javascript:void(0);" onclick="replaceText(\' '.$smile.'\', document.forms.postform.postmessage); return false;"><i class="'.$image.' fa-smiley"></i></a>';
+?>			
+							<br>							
+							<input type="submit" value="<?php echo $txt[73]; ?>">
+						</div>
+					</div>
+				</div>
+			</div>

@@ -1,116 +1,120 @@
-/* general settings */
-img { 
+img 
+{ 
 	border: 0; 
 	margin: 0px 2px 0px 2px;
 }
-body {
-	font: 12px Verdana,Tahoma,Arial,sans-serif;
-	background: #ffffff;
+input[type="text"] {
+  flex: 1
+}
+input, select, textarea {
+    width: 100%;
+	margin-bottom: 5px;
+}
+.forum-title
+{
+	font-size: 20px;
+}
+.header-button
+{
+	float: right;
+}
+.header-news
+{
+	font-weight: bold;
+}
+.fa-iconsize
+{
+	font-size: 15px;
+	color: #5f6268;
+}
+.fa-smiley
+{
+	font-size: 20px;
+	color: #cec923;
+}
+.fa-normalsize
+{
+	font-size: 35px;
+	color: #5f6268;
+}
+.div-center
+{
+	text-align: center;
+	padding-top: 8px;
+}
+.div-right
+{
+	text-align: right;
+}
+.user-avatar
+{
+	display: inline-block!important;
+	width: 150px;
+	height: 150px;
+}
+.div-forum-name
+{
+	background-color: #e8d3ff;
+	color: #000000;
+	font-weight: bolder;
+	font-size: 40px;
+}
+.div-header
+{
+	background-color: #c6cfff;
+	color: #000000;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.div-news
+{
+	background-color: #deecff;
+	color: #000000;
+	font-weight: bolder;
+	font-size: 20px;
+}
+.div-title
+{
+	background-color: #c6cfff;
+	color: #000000;
+	padding-bottom: 5px;
+	font-weight: bold;
+}
+.div-content
+{
+	background-color: #f3f8ff;
+	color: #000000;
+	padding-bottom: 5px;
+}
+.div-content-left
+{
+	background-color: #deecff;
 	color: #000000;
 }
-
-/* the headings you can use */
-h1, h2
+.div-topic-options
 {
-	padding: 0px;
+	background-color: #e8d3ff;
+	color: #000000;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
-h1 { 
-	 font-size: 16px;
-     font-weight: bold;
-	 color: #33517A;
-}
-h2 { /* page headers */
-    font-size: 16px;   
-	text-align: left;
-    font-weight: bold;
-    color: black;
-} 
-
-/* how the links should behave */
-a { text-decoration: none; }
-a:link { color: #003366; }
-a:visited { color: #003366; }
-a:active { color: #003366; }
-a:hover { color: #0D4D89; }
-
-/* single pixel borders on input boxes */
-input, textarea, select
+.container
 {
-   background-color: #E3E4FA;
-   border-width: 1px;
-   border-style: solid;
-   border-color: black;
+	margin-top: 10px;
 }
-
-/* text in tables */
-td, th {
-	font: 12px Verdana,Tahoma,Arial,sans-serif;
+.div-admin-options
+{
+	background-color: #e8d3ff;
+	color: #000000;
 }
-.code {
-   font: 12px "Lucida Console", "American Typewriter", "Courier New", "Courier", "monospace";
+.div-outline
+{
+	border-top: 1px solid #000000;
+	border-left: 1px solid #000000;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
 }
-
-/* a class that describes how tables should look */
-.datatable {
-		border-collapse: collapse;
-		margin-left:auto; 
-		margin-right:auto;
-}
-.datatable td {
-		border: 1px solid #c8c8c8;	
-		padding: 4px;
-    	vertical-align: top;
-		background-color: #FFFFFF;
-}
-.datatable caption {
-		font-size: 12px;
-		font-weight: bold;
-		color: #33517A;
-		text-align: left;
-		padding-top: 3px;
-		padding-bottom: 8px;
-		margin-left: auto;
-		margin-right: auto;
-}
-/* MOST IMPORTANT COLORS YOU CHANGE HERE! */
-.datatable th {
-		background-color: #d9dffb;
-		font-weight: bold;
-		color: #666677;
-		text-align: left;
-		padding: 4px;
-        border: 1px solid #c8c8c8;
-}
-.datatable td.title {
-		background-color: #FFFFFF;
-}
-.datatable td.date {
-		background-color: #FFFFFF;
-}
-.datatable td.post {
-		background-color: #FFFFFF;
-}
-.datatable td.altpost {
-		background-color: #FFFFFF;
-}
-.datatable td.altrow {
-		background-color: #FFFFFF;
-}
-.datatable td.info {
-		background-color: #FFFFFF;
-}
-.datatable tr:hover, .datatable tr.hilite {
-		background-color: #dff;
-		color: #000000;
-}
-table#borderless {
-	/*border-collapse: collapse;*/
-	border: 0px;
-}
-table.borderless th,
-table.borderless td {
-	border: 0px;
-	padding: 0px;
-	border-style: hidden;
-	vertical-align: top;
+.div-label
+{
+	font-weight: bold;
 }

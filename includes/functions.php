@@ -3,6 +3,18 @@
 	$now = Date($date_format);
 	$default_group_id = 3; //1=admin/2=moderator/3=member/4=banned
 
+	$smiles = array(
+		':)'=>'fas fa-smile',
+		':P'=>'fas fa-grin-tongue-wink',
+		';)'=>'"fas fa-smile-wink',
+		':D'=>'fas fa-laugh-beam',
+		':}'=>'fas fa-grin-beam-sweat',
+		'<3'=>'fas fa-kiss-beam',
+		':<3'=>'fas fa-kiss-wink-heart',
+		':{'=>'fas fa-sad-tear',
+		':=('=>'fas fa-sad-cry'
+	);
+	
 	Function rand_string($length) 
 	{
 		$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -115,12 +127,24 @@
 	
 	Function Message($title, $message, $fatal) 
 	{
-		global $called_from_index;
-		echo "<table class=\"datatable\" width=\"40%\">";
-		echo "<caption>".$title."</caption>";
-		echo "<tr><td width=\"50\"><img src=\"gfx/message.gif\" /></td>";
-		echo "<td width=\"*\">".$message."</td></tr>";
-		echo "</table><br /><br />";
+		global $called_from_index; // for footer
+?>
+			<div class="columns">		
+				<div class="column col-5 col-sm-12 col-mx-auto div-outline">
+					<div class="columns">		
+						<div class="column col-12 div-title">
+							<?php echo $title; ?>
+						</div>
+					</div>
+					<div class="columns">		
+						<div class="column col-12 div-content">
+							<?php echo $message; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+<?php		
 		if ($fatal == "true") 
 		{
 			include("./footer.php");
@@ -130,6 +154,8 @@
 	
 	Function replaceBBC($text)
 	{
+		global $smiles;
+		
 		$text = preg_replace("#\[quote\](.*?)\[/quote\]#si","<table class=\"datatable\" width=\"90%\"><caption>quote</caption><tr><td><small>\\1</small></td></tr></table>", $text);
 		$text = preg_replace("#\[b\](.*?)\[/b\]#si","<b>\\1</b>", $text);
 		$text = preg_replace("#\[u\](.*?)\[/u\]#si","<u>\\1</u>", $text);
@@ -139,16 +165,8 @@
 		$text = preg_replace("#\[img\](.*?)\[/img\]#si","<img src=\\1>", $text);
 		$text = preg_replace("#\[color=(.*?)\](.*?)\[/color\]#si","<font color=\\1>\\2</font>", $text);
 		$text = preg_replace("#\[edit\](.*?)\[/edit\]#si","<font color=orange><b>Edit</b></font>: \\1", $text);
-		$smiles = array(':)'=>'smiley',
-						';)'=>'wink',
-						':P'=>'tongue',
-						':D'=>'grin',
-						'8)'=>'cool',
-						':('=>'sad',
-						'o0'=>'blink',
-						':@'=>'angry');
 		foreach($smiles as $smile=>$image)
-			$text = str_replace($smile,"<img src=\"gfx/smilies/".$image.".gif\" />", $text);
+			$text = str_replace($smile,'<i class="'.$image.' fa-smiley"></i>', $text);
 		return $text;
 	}
 	

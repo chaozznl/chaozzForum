@@ -29,14 +29,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=<?php echo $charset ?>" />
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Pragma" content="no-cache">
 		<meta http-equiv="Expires" content="-1">
-		<meta name="description" content="BoardsDHB - Boards Don't Hit Back Forum Software" />
-		<meta name="keywords" content="Forum, Flatfile, No database, Simple, Boards, Forums, BoardsDHB, FubarForum, Fubar" />
-		<meta name="author" content="E. Wenners / chaozz@work / www.chaozz.nl" />
+		<meta name="description" content="chaozzForum - Flatfile Forum Software" />
+		<meta name="keywords" content="Forum, Flatfile, No database, Simple, Boards, Forums, chaozzForum, chaozzDB" />
+		<meta name="author" content="E. Wenners / www.chaozz.nl" />
 		<title><?php echo urldecode($settings[0]['forum_name']) ?></title>
-		<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+		<link rel="stylesheet" href="./css/stylesheet.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 		<script language="JavaScript" type="text/javascript" src="includes/javascript.js"></script>
 		<script language = "javascript">
 		<!-- 
@@ -50,76 +55,119 @@
 		
 	</head>
 	<body>
-		<table class="datatable" width="80%">
-			<tr><td class="title"><h2><?php echo urldecode($settings[0]['forum_name']); ?></h2>
+		<div class="container">
+			<div class="columns">		
+				<div class="column col-9 col-sm-12 col-mx-auto div-outline">
+					<div class="columns">		
+						<div class="column col-12 div-forum-name div-forum-name">
+							<?php echo urldecode($settings[0]['forum_name']); ?>
+						</div>
+					</div>
+			
+					<div class="columns">		
+						<div class="column col-12 div-header">
+							<div class="columns">		
+								<!-- welcome message //-->
+								<div class="column col-7">
 <?php
-				if (!isset($_SESSION['user_id'])) 
-				{
-					echo "<a href=\"index.php?page=profile\"><img src=\"gfx/button_register.png\" align=\"right\"  /></a>"; 
-					echo "<a href=\"index.php?page=user\"><img src=\"gfx/button_login.png\" align=\"right\"  /></a>";
-					echo $txt[114];
-				}
-				else 
-				{
-					echo "<a href=\"index.php?page=user&action=logout\"><img src=\"gfx/button_logout.png\" align=\"right\"  /></a>";
-					echo "<a href=\"index.php?page=members\"><img src=\"gfx/button_members.png\" align=\"right\"  /></a>";
-					echo "<a href=\"index.php?page=profile\"><img src=\"gfx/button_profile.png\" align=\"right\"  /></a>";
-					echo "<a href=\"index.php?page=search\"><img src=\"gfx/button_search.png\" align=\"right\"  /></a>";
-					
-					if ($_SESSION['group_id'] == 1)
-						echo "<a href=\"index.php?page=admin\"><img src=\"gfx/button_admin.png\" align=\"right\"  /></a>";
-					echo $txt[113]." <strong>".$_SESSION['name']."</strong>!"; 
+	if (!isset($_SESSION['user_id'])) 
+		echo $txt[114]; // welcome the guest
+	else 
+		echo $txt[113].' <span class="div-label">'.$_SESSION['name'].'</span>!'; // welcome the user
+?>
+								</div>
+						
+								<!-- forum options //-->
+								<div class="column col-5 div-right">
+									<a href="index.php"><i class="fas fa-home fa-normalsize" title="<?php echo $txt[160]; ?>"></i></a>
+<?php
+	if (!isset($_SESSION['user_id'])) 
+	{
+?>					
+									<a href="index.php?page=profile"><i class="fas fa-user-edit fa-normalsize" title="<?php echo $txt[83]; ?>"></i></a>
+									<a href="index.php?page=user"><i class="fas fa-sign-in-alt fa-normalsize" title="<?php echo $txt[105]; ?>"></i></a>
+<?php					
+	}
+	else 
+	{
+?>					
+									<a href="index.php?page=profile"><i class="fas fa-user-edit fa-normalsize" title="<?php echo $txt[84]; ?>"></i></a>
+									<a href="index.php?page=search"><i class="fas fa-search fa-normalsize" title="<?php echo $txt[97]; ?>"></i></a>
+									<a href="index.php?page=members"><i class="fas fa-users fa-normalsize" title="<?php echo $txt[44]; ?>"></i></a>
+<?php					
+	if ($_SESSION['group_id'] == 1)
+	{
+?>						
+									<a href="index.php?page=admin"><i class="fas fa-toolbox fa-normalsize" title="<?php echo $txt[13]; ?>"></i></a>
+<?php							
+	}
+?>
+									<a href="index.php?page=user&action=logout"><i class="fas fa-sign-out-alt fa-normalsize" title="<?php echo $txt[161]; ?>"></i></a>
+<?php							
 				}				
 ?>					
-				<a href="index.php"><img src="gfx/button_home.png" align="right"  /></a>
-			</tr></td>
-<?php		if ($settings[0]['news'] != "") echo "<tr><td class=\"altrow\"><strong>".$txt[116].":</strong> ".urldecode($settings[0]['news'])."</td></tr>"; ?>
-		</table>
-		<br	/>
-		<br />
-		<?php
-			$banned = false;
-			
-			// logged in or not, if you're on the ip ban list, you can not view this forum
-			$ban = chaozzdb_query ("SELECT id FROM ban WHERE name = ".GetUserIP());
-			if (count($ban) > 0) $banned = true;
-			
-			if (isset($_SESSION['user_id']))
-			{
-				$ban = chaozzdb_query ("SELECT * FROM user WHERE id = {$_SESSION['user_id']}");
-				// you're group id in the database is banned-group
-				if (intval($ban[0]['group_id']) == 4) $banned = true;
-				// your group got changed while you were logged in, so we need to update your session
-				if ($_SESSION['group_id'] != $ban[0]['group_id']) $_SESSION['group_id'] = $ban[0]['group_id'];
-			}
-			else
-			{
-				// you're not logged in? then check if guests are allowed to view this page
-				if ($page == "viewboard" || $page == "viewtopic" || $page == "search" || $page == "viewcategories")
-					if ($settings[0]['guest_view'] == 0 && !isset($_SESSION['user_id']))
-						Message ($txt[11], $txt[48], true);
-			}
+								</div>	
+							</div>
+						</div>
+					</div>	
+<?php
+	if ($settings[0]['news'] != "") 
+	{
+?>				
+					<div class="columns">		
+						<div class="column col-12 div-news">
+							<?php echo $txt[116]; ?>: <?php echo urldecode($settings[0]['news']); ?>
+						</div>
+					</div>
+<?php			
+	}
+?>
+				</div>
+			</div>
+			<br>
+<?php
+	$banned = false;
+	
+	// logged in or not, if you're on the ip ban list, you can not view this forum
+	$ban = chaozzdb_query ("SELECT id FROM ban WHERE name = ".GetUserIP());
+	if (count($ban) > 0) $banned = true;
+	
+	if (isset($_SESSION['user_id']))
+	{
+		$ban = chaozzdb_query ("SELECT * FROM user WHERE id = {$_SESSION['user_id']}");
+		// you're group id in the database is banned-group
+		if (intval($ban[0]['group_id']) == 4) $banned = true;
+		// your group got changed while you were logged in, so we need to update your session
+		if ($_SESSION['group_id'] != $ban[0]['group_id']) $_SESSION['group_id'] = $ban[0]['group_id'];
+	}
+	else
+	{
+		// you're not logged in? then check if guests are allowed to view this page
+		if ($page == "viewboard" || $page == "viewtopic" || $page == "search" || $page == "viewcategories")
+			if ($settings[0]['guest_view'] == 0 && !isset($_SESSION['user_id']))
+				Message ($txt[11], $txt[48], true);
+	}
 
-			// banned
-			if ($banned)
-				Message ($txt[11], $txt[115], true);
-			
-			// under maintenance
-			if ($settings[0]['maintenance_mode'] == 1)
-				if (!isset($_SESSION['user_id']) || $_SESSION['group_id'] >= $default_group_id)
-					Message ($txt[11], $txt[127], true);
-			
-			// does the page we request exist?
-			if (file_exists("./".$page.".php")) 
-			{ 
-				// reset them just to be sure
-				unset($record); unset($value);
-				unset($board_record); unset($board_value);
-				unset($topic_record); unset($topic_value);
-				unset($post_record); unset($post_value);
-				unset($current_record);
-				include("./".$page.".php"); 
-			}
-			else Message ($txt[11], "404 error (".$page.")", false);
-			include("./footer.php");
+	// banned
+	if ($banned)
+		Message ($txt[11], $txt[115], true);
+	
+	// under maintenance
+	if ($settings[0]['maintenance_mode'] == 1)
+		if (!isset($_SESSION['user_id']) || $_SESSION['group_id'] >= $default_group_id)
+			Message ($txt[11], $txt[127], true);
+	
+	// does the page we request exist?
+	if (file_exists("./".$page.".php")) 
+	{ 
+		// reset them just to be sure
+		unset($record); unset($value);
+		unset($board_record); unset($board_value);
+		unset($topic_record); unset($topic_value);
+		unset($post_record); unset($post_value);
+		unset($current_record);
+		include("./".$page.".php"); 
+	}
+	else Message ($txt[11], "404 error (".$page.")", false);
+	include("./footer.php");
 ?>

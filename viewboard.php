@@ -15,21 +15,34 @@
 		
 		// allowed here, but can you post
 		if ($board[0]['readonly'] == 0 || $_SESSION['group_id'] < $default_group_id) 
-			$post_topic_link = "<a href=\"index.php?page=post&action=topic.add&board_id=".intval($board[0]['id'])."\"><img src=\"gfx/button_new-topic.png\" align=\"right\" /></a>";
+			$post_topic_link = '<a href="index.php?page=post&action=topic.add&board_id='.intval($board[0]['id']).'"><i class="fas fa-plus-square fa-normalsize" title="'.$txt[162].'"></i></a>';
 	}
 	
 	// get some details from the category
 	$category = chaozzdb_query ("SELECT * FROM category WHERE id = {$board[0]['category_id']}"); 
-	
-	// navigation
-	echo "<table class=\"datatable\" width=\"80%\">";
-	echo "<caption>";
-	echo "<img src=\"gfx/nav.gif\" align=\"left\" />";
-	echo $post_topic_link;
-	echo "<a href=\"index.php\">".urldecode($settings[0]['forum_name'])."</a> ";
-	echo "> <a href=\"index.php\">".urldecode($category[0]['name'])."</a> ";
-	echo "> <a href=\"index.php?page=viewboard&board_id=".intval($board[0]['id'])."\">".urldecode($board[0]['name'])."</a></caption>";
-	
+?>	
+			<!-- // navigation //-->
+			<div class="columns">		
+				<div class="column col-9 col-sm-12 col-mx-auto">
+					<div class="columns">		
+						<div class="column col-7">
+							<i class="fas fa-folder-open fa-iconsize"></i>
+							<a href="index.php"><?php echo urldecode($settings[0]['forum_name']); ?></a>
+							<i class="fas fa-chevron-right fa-iconsize"></i>
+							<a href="index.php"><?php echo urldecode($category[0]['name']); ?></a>
+							<i class="fas fa-chevron-right"></i>
+							<a href="index.php?page=viewboard&board_id=<?php echo intval($board[0]['id']); ?>"><?php echo urldecode($board[0]['name']); ?></a>
+						</div>
+						<div class="column col-5 div-right">
+							<?php echo $post_topic_link ?>
+						</div>
+					</div>
+				</div>
+			</div>	
+			
+			<div class="columns">		
+				<div class="column col-9 col-sm-12 col-mx-auto div-outline">
+<?php	
 	for ($loop = 0; $loop < 2; $loop++)
 	{
 		// first list the sticky topics
@@ -55,14 +68,14 @@
 			if ($start > 0)
 			{
 				$prev_start = $start - $topics_per_page;
-				$prev_page_link = "[<a href=\"page=viewboard&board_id=$board_id&start=$prev_start\">Previous page</a>]";
+				$prev_page_link = '<a href="page=viewboard&board_id=$board_id&start=$prev_start"><i class="fas fa-arrow-left fa-iconsize"></i></a>';
 			}
 			
 			// next page
 			if ($topic_count > $topics_per_page)
 			{
 				$next_start = $start + $topics_per_page;
-				$next_page_link = "[<a href=\"page=viewboard&board_id=$board_id&start=$next_start\">Next page</a>]";
+				$next_page_link = '<a href=\"page=viewboard&board_id=$board_id&start=$next_start"><i class="fas fa-arrow-right fa-iconsize"></i></a>';
 				$topic_count --; // subtract one record, because we queried one too many
 			}
 			else $next_page_link = "";
@@ -72,30 +85,63 @@
 		}
 		if (count($topic) > 0)
 		{
-			echo "<tr><th colspan=\"4\" class=\"title\"><strong>$title</strong></th></tr>";
+?>			
+					<div class="columns">		
+						<div class="column col-12 div-title">
+							<?php echo $title; ?>
+						</div>
+					</div>	
+<?php			
 			for ($i = 0; $i < $topic_count; $i++)
 			{
 				if ($loop == 1)
 					if ($topic[$i]['sticky'] == 1) continue; // skip the sticky posts
 				
 				// number of posts in this topic
-				$post = chaozzdb_query ("SELECT * FROM post WHERE topic_id = {$topic[$i]['id']} ORDER BY create_date DESC"); // all posts in this topic, sorted by date DESC
-				$num_posts = count($post) -1; // we subtract 1 because the firs post is the topic start post and not a reply
+				$reply = chaozzdb_query ("SELECT * FROM post WHERE topic_id = {$topic[$i]['id']} ORDER BY create_date DESC"); // all posts in this topic, sorted by date DESC
+				$num_reply = count($reply) -1; // we subtract 1 because the firs post is the topic start post and not a reply
 				
 				// original topic starter
 				$user = chaozzdb_query ("SELECT * FROM user WHERE id = {$topic[$i]['user_id']}"); // who posted this?
-				
-				echo "<td width=\"25\" class=\"altpost\"><img src=\"gfx/topic.gif\" /></td>";
-				echo "<td width=\"*\" class=\"post\">";
-				
-				if (intval($topic[$i]['sticky']) == 1) echo "<img src=\"gfx/sticky.gif\" align=\"right\" />";
-				if (intval($topic[$i]['locked']) == 1) echo "<img src=\"gfx/locked.gif\" align=\"right\" />";
-				echo "<a href=\"index.php?page=viewtopic&topic_id=".intval($topic[$i]['id'])."\">".urldecode($topic[$i]['name'])."</a><br /><small>".$txt[38]." ".urldecode($user[0]['name'])."</small></td>";
-				echo "<td width=\"100\" class=\"altpost\"><small>".$num_posts." ".$txt[99]."</small>";
-				echo "<td width=\"300\" class=\"post\"><small>".$txt[143]." ".Number2Date($post[0]['create_date'])." ".$txt[38]." ".urldecode($user[0]['name'])."</small></td></tr>";
+?>
+					<div class="columns">		
+						<div class="column col-12">
+							<div class="columns">		
+								<div class="column col-1 div-center div-content-left">
+									<i class="fas fa-file-alt fa-iconsize"></i>
+								</div>
+								<div class="column col-6 div-content">
+<?php				
+				if (intval($topic[$i]['sticky']) == 1) echo '<i class="fas fa-thumbtack fa-iconsize"></i>';
+				if (intval($topic[$i]['locked']) == 1) echo '<i class="fas fa-lock fa-iconsize"></i>';
+?>				
+									<a href="index.php?page=viewtopic&topic_id=<?php echo intval($topic[$i]['id']); ?>"><?php echo urldecode($topic[$i]['name']); ?></a>
+									<?php echo $txt[38]; ?> <?php echo urldecode($user[0]['name']); ?>
+								</div>	
+								<div class="column col-2 div-content">
+									<td width="100" class="altpost"><?php echo $num_reply; ?> <?php echo $txt[99]; ?>
+								</div>	
+								<div class="column col-3 div-content">
+									<td width="300" class="post"><?php $txt[143]; ?> <?php echo Number2Date($reply[0]['create_date']); ?> 
+									<?php echo $txt[38]; ?> <?php echo urldecode($user[0]['name']); ?>
+								</div>	
+							</div>
+						</div>
+					</div>	
+<?php								
 			}
 		}
 	}		
-	if ($prev_page_link != "" && $next_page_link != "") echo "<tr><td colspan=\"4\">$prev_page_link $next_page_link</td></tr>";
-	echo "</table>";
-?>	
+	if ($prev_page_link != "" && $next_page_link != "") 
+	{
+?>
+					<div class="columns">		
+						<div class="column col-12">
+							<?php echo $prev_page_link; ?> <?php echo $next_page_link; ?>
+						</div>
+					</div>	
+<?php
+	}
+?>			
+				</div>
+			</div>	

@@ -3,11 +3,33 @@
 <?php
 	$user = chaozzdb_query ("SELECT * FROM user ORDER BY name ASC"); 
 	if (count($user) == 0) die(); // this should never happen. there should always be an admin
-		
-	echo "<table class=\"datatable\" width=\"60%\">";
-	echo "<caption>".$txt[44]."</caption>";
-	echo "<tr><th>".$txt[45]."</th><th>".$txt[46]."</th><th>".$txt[118]."</th><th>".$txt[47]."</th></tr>";
-	
+?>
+			<div class="columns">		
+				<div class="column col-9 col-sm-12 col-mx-auto div-outline">
+					<div class="columns">		
+						<div class="column col-12 div-title">
+							<?php echo $txt[44]; ?>
+						</div>
+					</div>	
+					<div class="columns">		
+						<div class="column col-12 div-title">
+							<div class="columns">		
+								<div class="column col-3">
+									<?php echo $txt[45]; ?>
+								</div>
+								<div class="column col-3">
+									<?php echo $txt[46]; ?>
+								</div>
+								<div class="column col-3">
+									<?php echo $txt[118]; ?>
+								</div>
+								<div class="column col-3">
+									<?php echo $txt[47]; ?>
+								</div>
+							</div>	
+						</div>	
+					</div>		
+<?php	
 	for ($i = 0; $i < count ($user); $i++)
 	{
 		// number of posts
@@ -19,12 +41,27 @@
 		
 		// joined date
 		$joindate = Number2Date($user[$i]['joindate']);
-
-		echo "<tr><td class=\"post\"><img src=\"gfx/member.gif\" />";
-		echo "<a href=\"index.php?page=profile&user_id=".intval($user[$i]['id'])."\">".urldecode($user[$i]['name'])."</a>"; 
-		echo "</td><td class=\"altpost\">".urldecode($group[0]['name'])."</td>";
-		echo "<td class=\"post\">".$joindate."</td>";
-		echo "<td class=\"altpost\">".$num_posts."</td></tr>";
-	}
-	echo "</table>";
 ?>
+					<div class="columns">		
+						<div class="column col-12 div-content">
+							<div class="columns">		
+								<div class="column col-3">
+									<a href="index.php?page=profile&user_id=<?php echo intval($user[$i]['id']); ?>"><?php echo urldecode($user[$i]['name']); ?></a>
+								</div>
+								<div class="column col-3">
+									<?php echo urldecode($group[0]['name']); ?>
+								</div>
+								<div class="column col-3">
+									<?php echo $joindate; ?>
+								</div>
+								<div class="column col-3">
+									<?php echo $num_posts; ?>
+								</div>
+<?php								
+	}
+?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
