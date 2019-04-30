@@ -20,7 +20,7 @@
 	{
 		// is the topic unlocked and the board not readonly, or are you staff?
 		if ((intval($topic[0]['locked']) == 0 && intval($board[0]['readonly']) == 0 && isset($_SESSION['user_id'])) || (isset($_SESSION['user_id']) && $_SESSION['group_id'] < 3)) 
-			$post_reply_link = '<a href="index.php?page=post&action=post.add&topic_id='.intval($topic[0]['id']).'"><i class="fas fa-plus-square fa-normalsize" title="'.$txt[163].'"></i></a>';
+			$post_reply_link = '<a href="index.php?page=post&action=post.add&topic_id='.intval($topic[0]['id']).'"><i class="fas fa-plus-square forum-button" title="'.$txt[163].'"></i></a>';
 	}	
 ?>
 			<!-- // navigation //-->
@@ -28,9 +28,9 @@
 				<div class="column col-9 col-sm-12 col-mx-auto">
 					<div class="columns">		
 						<div class="column col-7">
-							<i class="fas fa-folder-open fa-iconsize"></i>
+							<i class="fas fa-folder-open forum-icon"></i>
 							<a href="index.php"><?php echo urldecode($settings[0]['forum_name']); ?></a>
-							<i class="fas fa-chevron-right fa-iconsize"></i>
+							<i class="fas fa-chevron-right forum-icon"></i>
 							<a href="index.php"><?php echo urldecode($category[0]['name']); ?></a>
 							<i class="fas fa-chevron-right"></i>
 							<a href="index.php?page=viewboard&board_id=<?php echo intval($board[0]['id']); ?>"><?php echo urldecode($board[0]['name']); ?></a>
@@ -62,11 +62,11 @@
 					<!-- // topic title //-->
 					<div class="columns">		
 						<div class="column col-12 div-title">
-							<i class="fas fa-file-alt fa-iconsize"></i>
+							<i class="fas fa-file-alt forum-icon"></i>
 							<?php echo $txt[110]; ?>: <?php echo urldecode($topic[0]['name']); ?>
 <?php				
-	if (intval($topic[0]['sticky']) == 1) echo '<i class="fas fa-thumbtack fa-iconsize" title="'.$txt[164].'"></i>';
-	if (intval($topic[0]['locked']) == 1) echo '<i class="fas fa-lock fa-iconsize" title="'.$txt[165].'"></i>';
+	if (intval($topic[0]['sticky']) == 1) echo '<i class="fas fa-thumbtack forum-icon" title="'.$txt[164].'"></i>';
+	if (intval($topic[0]['locked']) == 1) echo '<i class="fas fa-lock forum-icon" title="'.$txt[165].'"></i>';
 ?>				
 						</div>
 					</div>	
@@ -84,14 +84,14 @@
 		if ($start > 0)
 		{
 			$prev_start = $start - $posts_per_page;
-			$prev_page_link = '<a href="page=viewtopic&topic_id=$topic_id&start='.$prev_start.'"><i class="fas fa-arrow-left fa-iconsize"></a>';
+			$prev_page_link = '<a href="page=viewtopic&topic_id=$topic_id&start='.$prev_start.'"><i class="fas fa-arrow-left forum-icon"></a>';
 		}
 		
 		// next page
 		if ($post_count > $posts_per_page)
 		{
 			$next_start = $start + $posts_per_page;
-			$next_page_link = '<a href="page=viewtopic&topic_id=$topic_id&start='.$next_start.'"><i class="fas fa-arrow-right fa-iconsize"></a>';
+			$next_page_link = '<a href="page=viewtopic&topic_id=$topic_id&start='.$next_start.'"><i class="fas fa-arrow-right forum-icon"></a>';
 			$post_count --; // subtract one record, because we queried one too many
 		}
 		else $next_page_link = "";
@@ -124,7 +124,7 @@
 			{
 ?>				
 									<a href="index.php?page=post&action=topic.delete&topic_id=<?php echo $topic[0]['id']; ?>" onclick="return confirm('<?php echo $txt[144]; ?>')">
-									<i class="fas fa-trash-alt fa-normalsize" title="<?php echo $txt[166]; ?>"></i></a>
+									<i class="fas fa-trash-alt forum-button" title="<?php echo $txt[166]; ?>"></i></a>
 <?php									
 			}
 			
@@ -139,7 +139,7 @@
 			{
 ?>				
 									<a href="index.php?page=post&action=topic.edit&topic_id=<?php echo intval($topic[0]['id']); ?>">
-									<i class="fas fa-edit fa-normalsize" title="<?php echo $txt[69]; ?>"></i></a>
+									<i class="fas fa-edit forum-button" title="<?php echo $txt[69]; ?>"></i></a>
 <?php									
 			}
 		}
@@ -151,7 +151,7 @@
 			{
 ?>				
 									<a href="index.php?page=post&action=post.delete&post_id=<?php echo intval($post[$i]['id']); ?>&topic_id=<?php echo intval($post[$i]['topic_id']); ?>" onclick="return confirm('<?php echo $txt[144]; ?>')">
-									<i class="fas fa-trash-alt fa-normalsize" title="<?php echo $txt[167]; ?>"></i></a>
+									<i class="fas fa-trash-alt forum-button" title="<?php echo $txt[167]; ?>"></i></a>
 <?php									
 			}
 			
@@ -165,7 +165,7 @@
 			{
 ?>				
 									<a href="index.php?page=post&action=post.edit&post_id=<?php echo intval($post[$i]['id']); ?>">
-									<i class="fas fa-edit fa-normalsize" title="<?php echo $txt[70]; ?>"></i></a>
+									<i class="fas fa-edit forum-button" title="<?php echo $txt[70]; ?>"></i></a>
 <?php									
 			}
 		}
@@ -229,14 +229,14 @@
 			}
 			
 			if (intval($topic[0]['locked']) == 0) 
-				echo '<a href="index.php?page=post&action=topic.lock&topic_id='.$topic[0]['id'].'"><i class="fas fa-lock fa-normalsize" title="'.$txt[168].'"></i></a>';
+				echo '<a href="index.php?page=post&action=topic.lock&topic_id='.$topic[0]['id'].'"><i class="fas fa-lock forum-button" title="'.$txt[168].'"></i></a>';
 			else
-				echo '<a href="index.php?page=post&action=topic.unlock&topic_id='.$topic[0]['id'].'"><i class="fas fa-unlock-alt fa-normalsize" title="'.$txt[169].'"></i></a>';
+				echo '<a href="index.php?page=post&action=topic.unlock&topic_id='.$topic[0]['id'].'"><i class="fas fa-unlock-alt forum-button" title="'.$txt[169].'"></i></a>';
 		
 			if (intval($topic[0]['sticky']) == 0) 
-				echo '<a href="index.php?page=post&action=topic.sticky&topic_id='.$topic[0]['id'].'"><i class="fas fa-thumbtack fa-normalsize" title="'.$txt[170].'"></i></a>';
+				echo '<a href="index.php?page=post&action=topic.sticky&topic_id='.$topic[0]['id'].'"><i class="fas fa-thumbtack forum-button" title="'.$txt[170].'"></i></a>';
 			else
-				echo '<a href="index.php?page=post&action=topic.unsticky&topic_id='.$topic[0]['id'].'"><i class="fas fa-thumbtack fa-normalsize" title="'.$txt[171].'"></i></a>';
+				echo '<a href="index.php?page=post&action=topic.unsticky&topic_id='.$topic[0]['id'].'"><i class="fas fa-thumbtack forum-button" title="'.$txt[171].'"></i></a>';
 ?>		
 								</div>
 							</div>

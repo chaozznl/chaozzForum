@@ -324,9 +324,9 @@
 						<div class="column col-12 div-content">
 							<?php echo $txt[145]; ?>: <?php echo $user[0]['ip']; ?>
 							<br>
-							<a href="?page=profile&action=user.banip&user_id=<?php echo $user_id; ?>"><i class="fas fa-user-slash fa-normalsize"></i></a>
+							<a href="?page=profile&action=user.banip&user_id=<?php echo $user_id; ?>"><i class="fas fa-user-slash forum-button"></i></a>
 							<br>
-							<a href="?page=profile&action=user.unbanip&user_id=<?php echo $user_id; ?>"><i class="fas fa-user fa-normalsize"></i></a>
+							<a href="?page=profile&action=user.unbanip&user_id=<?php echo $user_id; ?>"><i class="fas fa-user forum-button"></i></a>
 							<br>
 							<form method="POST" action="index.php?page=profile">
 								<input type="hidden" name="action" value="user.addtogroup">

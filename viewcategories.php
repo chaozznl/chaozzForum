@@ -16,7 +16,7 @@
 ?>		
 					<div class="columns">		
 						<div class="column col-12 div-title">
-							<i class="fas fa-folder-open fa-iconsize"></i> <?php echo urldecode($category[$i]['name']); ?>
+							<i class="fas fa-folder-open forum-icon"></i> <?php echo urldecode($category[$i]['name']); ?>
 						</div>
 					</div>
 <?php			
@@ -60,9 +60,9 @@
 						<div class="column col-1 col-sm-2 div-center div-content-left">
 <?php								
 				if (intval($board[$j]['readonly']) == 1) 
-					echo '<i class="fas fa-lock fa-normalsize"></i>';
+					echo '<i class="fas fa-lock forum-button"></i>';
 				else 
-					echo  '<i class="fas fa-file-alt fa-normalsize"></i>';
+					echo  '<i class="fas fa-file-alt forum-button"></i>';
 ?>				
 						</div>
 					
@@ -111,7 +111,7 @@
 						<div class="column col-12 col-mx-auto">
 							<div class="columns">		
 								<div class="column col-1 col-sm-2 div-center div-content-left">
-									<i class="fas fa-chart-pie fa-normalsize"></i>
+									<i class="fas fa-chart-pie forum-button"></i>
 								</div>
 								<div class="column col-11 col-sm-10 col-sm-10 div-content">
 <?php	

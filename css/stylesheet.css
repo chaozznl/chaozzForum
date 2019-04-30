@@ -22,17 +22,26 @@ input, select, textarea {
 {
 	font-weight: bold;
 }
-.fa-iconsize
+.forum-icon
 {
 	font-size: 15px;
 	color: #5f6268;
 }
-.fa-smiley
+.forum-smiley
 {
 	font-size: 20px;
 	color: #cec923;
+	margin-left: 2px;
+	margin-right: 2px;
 }
-.fa-normalsize
+.forum-markup
+{
+	font-size: 20px;
+	color: #5f6268;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+.forum-button
 {
 	font-size: 35px;
 	color: #5f6268;

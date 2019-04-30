@@ -15,7 +15,7 @@
 		
 		// allowed here, but can you post
 		if ($board[0]['readonly'] == 0 || $_SESSION['group_id'] < $default_group_id) 
-			$post_topic_link = '<a href="index.php?page=post&action=topic.add&board_id='.intval($board[0]['id']).'"><i class="fas fa-plus-square fa-normalsize" title="'.$txt[162].'"></i></a>';
+			$post_topic_link = '<a href="index.php?page=post&action=topic.add&board_id='.intval($board[0]['id']).'"><i class="fas fa-plus-square forum-button" title="'.$txt[162].'"></i></a>';
 	}
 	
 	// get some details from the category
@@ -26,9 +26,9 @@
 				<div class="column col-9 col-sm-12 col-mx-auto">
 					<div class="columns">		
 						<div class="column col-7">
-							<i class="fas fa-folder-open fa-iconsize"></i>
+							<i class="fas fa-folder-open forum-icon"></i>
 							<a href="index.php"><?php echo urldecode($settings[0]['forum_name']); ?></a>
-							<i class="fas fa-chevron-right fa-iconsize"></i>
+							<i class="fas fa-chevron-right forum-icon"></i>
 							<a href="index.php"><?php echo urldecode($category[0]['name']); ?></a>
 							<i class="fas fa-chevron-right"></i>
 							<a href="index.php?page=viewboard&board_id=<?php echo intval($board[0]['id']); ?>"><?php echo urldecode($board[0]['name']); ?></a>
@@ -68,14 +68,14 @@
 			if ($start > 0)
 			{
 				$prev_start = $start - $topics_per_page;
-				$prev_page_link = '<a href="page=viewboard&board_id=$board_id&start=$prev_start"><i class="fas fa-arrow-left fa-iconsize"></i></a>';
+				$prev_page_link = '<a href="page=viewboard&board_id=$board_id&start=$prev_start"><i class="fas fa-arrow-left forum-icon"></i></a>';
 			}
 			
 			// next page
 			if ($topic_count > $topics_per_page)
 			{
 				$next_start = $start + $topics_per_page;
-				$next_page_link = '<a href=\"page=viewboard&board_id=$board_id&start=$next_start"><i class="fas fa-arrow-right fa-iconsize"></i></a>';
+				$next_page_link = '<a href=\"page=viewboard&board_id=$board_id&start=$next_start"><i class="fas fa-arrow-right forum-icon"></i></a>';
 				$topic_count --; // subtract one record, because we queried one too many
 			}
 			else $next_page_link = "";
@@ -108,12 +108,12 @@
 						<div class="column col-12">
 							<div class="columns">		
 								<div class="column col-1 div-center div-content-left">
-									<i class="fas fa-file-alt fa-iconsize"></i>
+									<i class="fas fa-file-alt forum-icon"></i>
 								</div>
 								<div class="column col-6 div-content">
 <?php				
-				if (intval($topic[$i]['sticky']) == 1) echo '<i class="fas fa-thumbtack fa-iconsize"></i>';
-				if (intval($topic[$i]['locked']) == 1) echo '<i class="fas fa-lock fa-iconsize"></i>';
+				if (intval($topic[$i]['sticky']) == 1) echo '<i class="fas fa-thumbtack forum-icon"></i>';
+				if (intval($topic[$i]['locked']) == 1) echo '<i class="fas fa-lock forum-icon"></i>';
 ?>				
 									<a href="index.php?page=viewtopic&topic_id=<?php echo intval($topic[$i]['id']); ?>"><?php echo urldecode($topic[$i]['name']); ?></a>
 									<?php echo $txt[38]; ?> <?php echo urldecode($user[0]['name']); ?>

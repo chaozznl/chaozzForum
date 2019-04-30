@@ -79,30 +79,30 @@
 						
 								<!-- forum options //-->
 								<div class="column col-5 div-right">
-									<a href="index.php"><i class="fas fa-home fa-normalsize" title="<?php echo $txt[160]; ?>"></i></a>
+									<a href="index.php"><i class="fas fa-home forum-button" title="<?php echo $txt[160]; ?>"></i></a>
 <?php
 	if (!isset($_SESSION['user_id'])) 
 	{
 ?>					
-									<a href="index.php?page=profile"><i class="fas fa-user-edit fa-normalsize" title="<?php echo $txt[83]; ?>"></i></a>
-									<a href="index.php?page=user"><i class="fas fa-sign-in-alt fa-normalsize" title="<?php echo $txt[105]; ?>"></i></a>
+									<a href="index.php?page=profile"><i class="fas fa-user-edit forum-button" title="<?php echo $txt[83]; ?>"></i></a>
+									<a href="index.php?page=user"><i class="fas fa-sign-in-alt forum-button" title="<?php echo $txt[105]; ?>"></i></a>
 <?php					
 	}
 	else 
 	{
 ?>					
-									<a href="index.php?page=profile"><i class="fas fa-user-edit fa-normalsize" title="<?php echo $txt[84]; ?>"></i></a>
-									<a href="index.php?page=search"><i class="fas fa-search fa-normalsize" title="<?php echo $txt[97]; ?>"></i></a>
-									<a href="index.php?page=members"><i class="fas fa-users fa-normalsize" title="<?php echo $txt[44]; ?>"></i></a>
+									<a href="index.php?page=profile"><i class="fas fa-user-edit forum-button" title="<?php echo $txt[84]; ?>"></i></a>
+									<a href="index.php?page=search"><i class="fas fa-search forum-button" title="<?php echo $txt[97]; ?>"></i></a>
+									<a href="index.php?page=members"><i class="fas fa-users forum-button" title="<?php echo $txt[44]; ?>"></i></a>
 <?php					
 	if ($_SESSION['group_id'] == 1)
 	{
 ?>						
-									<a href="index.php?page=admin"><i class="fas fa-toolbox fa-normalsize" title="<?php echo $txt[13]; ?>"></i></a>
+									<a href="index.php?page=admin"><i class="fas fa-toolbox forum-button" title="<?php echo $txt[13]; ?>"></i></a>
 <?php							
 	}
 ?>
-									<a href="index.php?page=user&action=logout"><i class="fas fa-sign-out-alt fa-normalsize" title="<?php echo $txt[161]; ?>"></i></a>
+									<a href="index.php?page=user&action=logout"><i class="fas fa-sign-out-alt forum-button" title="<?php echo $txt[161]; ?>"></i></a>
 <?php							
 				}				
 ?>					

@@ -26,7 +26,7 @@
 				$topic = chaozzdb_query ("SELECT * FROM topic WHERE id = {$search[$i]['topic_id']}");
 ?>
 								<div class="column col-1 div-center">
-									<i class="fas fa-file-alt fa-iconsize"></i>
+									<i class="fas fa-file-alt forum-icon"></i>
 								</div>
 								<div class="column col-11">
 									<a href="index.php?page=viewtopic&topic_id=<?php echo intval($topic[0]['id']); ?>"><?php echo urldecode($topic[0]['name']); ?></a>

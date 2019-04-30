@@ -282,9 +282,9 @@
 						<div class="column col-1 col-sm-2 div-center div-content-left">
 <?php								
 		if (intval($board[$j]['readonly']) == 1) 
-			echo '<i class="fas fa-lock fa-normalsize"></i>';
+			echo '<i class="fas fa-lock forum-button"></i>';
 		else 
-			echo  '<i class="fas fa-file-alt fa-normalsize"></i>';
+			echo  '<i class="fas fa-file-alt forum-button"></i>';
 ?>				
 						</div>
 						<!-- board name and description //-->
