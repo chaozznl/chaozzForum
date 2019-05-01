@@ -84,14 +84,14 @@
 	if (!isset($_SESSION['user_id'])) 
 	{
 ?>					
-									<a href="index.php?page=profile"><i class="fas fa-user-edit forum-button" title="<?php echo $txt[83]; ?>"></i></a>
+									<a href="index.php?page=profile"><i class="fas fa-user-edit forum-button" title="<?php echo $txt[84]; ?>"></i></a>
 									<a href="index.php?page=user"><i class="fas fa-sign-in-alt forum-button" title="<?php echo $txt[105]; ?>"></i></a>
 <?php					
 	}
 	else 
 	{
 ?>					
-									<a href="index.php?page=profile"><i class="fas fa-user-edit forum-button" title="<?php echo $txt[84]; ?>"></i></a>
+									<a href="index.php?page=profile"><i class="fas fa-user-edit forum-button" title="<?php echo $txt[83]; ?>"></i></a>
 									<a href="index.php?page=search"><i class="fas fa-search forum-button" title="<?php echo $txt[97]; ?>"></i></a>
 									<a href="index.php?page=members"><i class="fas fa-users forum-button" title="<?php echo $txt[44]; ?>"></i></a>
 <?php					
