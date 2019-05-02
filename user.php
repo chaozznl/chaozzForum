@@ -41,7 +41,7 @@
 	if (!isset($_SESSION['user_id'])) 
 	{
 		 // captcha
-		include($url."/includes/simple-php-captcha.php");
+		include("./includes/simple-php-captcha.php");
 		$_SESSION['captcha'] = simple_php_captcha();
 ?>
 
