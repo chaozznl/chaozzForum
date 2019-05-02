@@ -13,6 +13,7 @@ input, select, textarea {
 pre
 {
 	background-color: #ffffff;
+	margin-top: 0px;
 }
 .forum-title
 {
