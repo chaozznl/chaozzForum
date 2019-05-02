@@ -156,7 +156,8 @@
 	{
 		global $smiles;
 		
-		$text = preg_replace("#\[quote\](.*?)\[/quote\]#si","<table class=\"datatable\" width=\"90%\"><caption>quote</caption><tr><td><small>\\1</small></td></tr></table>", $text);
+		$text = preg_replace("#\[code\](.*?)\[/code\]#si","<strong>code:</strong><pre>\\1</pre>", $text);
+		$text = preg_replace("#\[quote\](.*?)\[/quote\]#si","<strong>quote:</strong><pre>\\1</pre>", $text);
 		$text = preg_replace("#\[b\](.*?)\[/b\]#si","<b>\\1</b>", $text);
 		$text = preg_replace("#\[u\](.*?)\[/u\]#si","<u>\\1</u>", $text);
 		$text = preg_replace("#\[i\](.*?)\[/i\]#si","<i>\\1</i>", $text);

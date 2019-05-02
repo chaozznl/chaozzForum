@@ -48,8 +48,8 @@
 		// first list the sticky topics
 		if ($loop == 0)
 		{
-			$topic = chaozzdb_query ("SELECT * FROM topic WHERE board_id = $board_id ORDER BY sticky DESC"); 
-			$topic_count = countValue($topic, "sticky", 1);
+			$topic = chaozzdb_query ("SELECT * FROM topic WHERE board_id = $board_id AND sticky = 1 ORDER BY sticky DESC"); 
+			$topic_count = count($topic);
 			$title = $txt[106];
 			$next_page_link = "";
 			$prev_page_link = "";
@@ -61,7 +61,7 @@
 			
 			$topics_per_page = intval($settings[0]['topics_per_page']);
 			
-			$topic = chaozzdb_query ("SELECT * FROM topic WHERE board_id = $board_id ORDER BY update_date DESC LIMIT $start,$topics_per_page"); 
+			$topic = chaozzdb_query ("SELECT * FROM topic WHERE board_id = $board_id AND sticky = 0 ORDER BY update_date DESC LIMIT $start,$topics_per_page"); 
 			$topic_count = count($topic);
 			
 			// previous page link
@@ -94,9 +94,6 @@
 <?php			
 			for ($i = 0; $i < $topic_count; $i++)
 			{
-				if ($loop == 1)
-					if ($topic[$i]['sticky'] == 1) continue; // skip the sticky posts
-				
 				// number of posts in this topic
 				$reply = chaozzdb_query ("SELECT * FROM post WHERE topic_id = {$topic[$i]['id']} ORDER BY create_date DESC"); // all posts in this topic, sorted by date DESC
 				$num_reply = count($reply) -1; // we subtract 1 because the firs post is the topic start post and not a reply
