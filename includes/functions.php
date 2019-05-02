@@ -10,7 +10,7 @@
 		':D'=>'fas fa-laugh-beam',
 		':}'=>'fas fa-grin-beam-sweat',
 		'<3'=>'fas fa-kiss-beam',
-		':<3'=>'fas fa-kiss-wink-heart',
+		';3'=>'fas fa-kiss-wink-heart',
 		':{'=>'fas fa-sad-tear',
 		':=('=>'fas fa-sad-cry'
 	);
