@@ -46,7 +46,7 @@
 						<div class="column col-12 div-content">
 							<div class="columns">		
 								<div class="column col-3">
-									<a href="index.php?page=profile&user_id=<?php echo intval($user[$i]['id']); ?>"><?php echo urldecode($user[$i]['name']); ?></a>
+									<a href="<?php echo $url; ?>/profile/user_id/<?php echo intval($user[$i]['id']); ?>.htm"><?php echo urldecode($user[$i]['name']); ?></a>
 								</div>
 								<div class="column col-3">
 									<?php echo urldecode($group[0]['name']); ?>

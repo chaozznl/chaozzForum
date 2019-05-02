@@ -135,7 +135,7 @@
 					</div>	
 					<div class="columns">		
 						<div class="column col-12 div-content">
-							<form method="POST" action="index.php?page=admin">
+							<form method="POST" action="<?php echo $url; ?>/admin.htm">
 								<input type="hidden" name="action" value="save.settings">
 								<span class="div-label"><?php echo $txt[14]; ?></span>
 								<br>
@@ -246,7 +246,7 @@
 					</div>
 					<div class="columns">		
 						<div class="column col-12 div-content">
-							<form method="POST" action="index.php?page=admin">
+							<form method="POST" action="<?php echo $url; ?>/admin.htm">
 								<input type="hidden" name="action" value="category.update">
 								<input type="hidden" name="category_id" value="<?php echo intval($category[$i]['id']); ?>">
 								<span class="div-label"><?php echo $txt[24]; ?></span>
@@ -259,10 +259,10 @@
 								<br>
 								<input type="submit" value="<?php echo $txt[27]; ?>">
 							</form>	
-							<form method="POST" action="index.php?page=admin">
+							<form method="POST" action="<?php echo $url; ?>/admin.htm">
 								<input type="hidden" name="action" value="category.delete">
 								<input type="hidden" name="category_id" value="<?php echo intval($category[$i]['id']); ?>">
-								<input type="submit" value="<?php echo $txt[28]; ?>">
+								<input type="submit" value="<?php echo $txt[28]; ?>" onclick="return confirm('<?php echo $txt[144]; ?>')">
 							</form>	
 						</div>
 					</div>
@@ -292,7 +292,7 @@
 							<span class="div-label"><?php echo urldecode($board[$j]['name']); ?></span>
 						</div>
 						<div class="column col-8 div-content">
-							<form method="POST" action="index.php?page=admin">
+							<form method="POST" action="<?php echo $url; ?>/admin.htm">
 								<input type="hidden" name="action" value="board.update">
 								<input type="hidden" name="board_id" value="<?php echo intval($board[$j]['id']); ?>">
 								<span class="div-label"><?php echo $txt[24]; ?></span>
@@ -325,10 +325,10 @@
 								<br>
 								<input type="submit" value="<?php echo $txt[27]; ?>">
 							</form>	
-							<form method="POST" action="index.php?page=admin">
+							<form method="POST" action="<?php echo $url; ?>/admin.htm">
 								<input type="hidden" name="action" value="board.delete">
 								<input type="hidden" name="board_id" value="<?php echo intval($board[$j]['id']); ?>">
-								<input type="submit" value="<?php echo $txt[28]; ?>">
+								<input type="submit" value="<?php echo $txt[28]; ?>" onclick="return confirm('<?php echo $txt[144]; ?>')">
 							</form>	
 						</div>	
 					</div>	
@@ -353,7 +353,7 @@
 					</div>	
 					<div class="columns">		
 						<div class="column col-12 div-content">
-							<form method="POST" action="index.php?page=admin">
+							<form method="POST" action="<?php echo $url; ?>/admin.htm">
 								<input type="hidden" name="action" value="category.add">
 								<span class="div-label"><?php echo $txt[24]; ?></span>
 								<br>
@@ -381,7 +381,7 @@
 					</div>	
 					<div class="columns">		
 						<div class="column col-12 div-content">
-							<form method="POST" action="index.php?page=admin">
+							<form method="POST" action="<?php echo $url; ?>/admin.htm">
 								<input type="hidden" name="action" value="board.add">
 								<span class="div-label"><?php echo $txt[24]; ?></span>
 								<br>

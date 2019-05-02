@@ -13,7 +13,8 @@
 	include("./includes/functions.php");
 	
 	$settings = chaozzdb_query ("SELECT * FROM settings WHERE id = 1"); // read before LANGUAGE file. some settings variables are used in it.
-
+	$url = urldecode($settings[0]['url']); // for quick reference throughout the script
+	
 	// read the most important IDs
 	$post_id = !empty($_REQUEST['post_id']) ? intval($_REQUEST['post_id']) : 0;
 	$topic_id = !empty($_REQUEST['topic_id']) ? intval($_REQUEST['topic_id']) : 0;
@@ -40,9 +41,9 @@
 		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
 		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
 		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
-		<link rel="stylesheet" href="./css/stylesheet.css">
+		<link rel="stylesheet" href="<?php echo $url; ?>/css/stylesheet.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-		<script language="JavaScript" type="text/javascript" src="includes/javascript.js"></script>
+		<script language="JavaScript" type="text/javascript" src="<?php echo $url; ?>/includes/javascript.js"></script>
 		<script language = "javascript">
 		<!-- 
 		  function addSmiley(smile) {
@@ -79,30 +80,30 @@
 						
 								<!-- forum options //-->
 								<div class="column col-5 div-right">
-									<a href="index.php"><i class="fas fa-home forum-button" title="<?php echo $txt[160]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/"><i class="fas fa-home forum-button" title="<?php echo $txt[160]; ?>"></i></a>
 <?php
 	if (!isset($_SESSION['user_id'])) 
 	{
 ?>					
-									<a href="index.php?page=profile"><i class="fas fa-user-edit forum-button" title="<?php echo $txt[84]; ?>"></i></a>
-									<a href="index.php?page=user"><i class="fas fa-sign-in-alt forum-button" title="<?php echo $txt[105]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/profile.htm"><i class="fas fa-user-edit forum-button" title="<?php echo $txt[84]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/user.htm"><i class="fas fa-sign-in-alt forum-button" title="<?php echo $txt[105]; ?>"></i></a>
 <?php					
 	}
 	else 
 	{
 ?>					
-									<a href="index.php?page=profile"><i class="fas fa-user-edit forum-button" title="<?php echo $txt[83]; ?>"></i></a>
-									<a href="index.php?page=search"><i class="fas fa-search forum-button" title="<?php echo $txt[97]; ?>"></i></a>
-									<a href="index.php?page=members"><i class="fas fa-users forum-button" title="<?php echo $txt[44]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/profile.htm"><i class="fas fa-user-edit forum-button" title="<?php echo $txt[83]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/search.htm"><i class="fas fa-search forum-button" title="<?php echo $txt[97]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/members.htm"><i class="fas fa-users forum-button" title="<?php echo $txt[44]; ?>"></i></a>
 <?php					
 	if ($_SESSION['group_id'] == 1)
 	{
 ?>						
-									<a href="index.php?page=admin"><i class="fas fa-toolbox forum-button" title="<?php echo $txt[13]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/admin.htm"><i class="fas fa-toolbox forum-button" title="<?php echo $txt[13]; ?>"></i></a>
 <?php							
 	}
 ?>
-									<a href="index.php?page=user&action=logout"><i class="fas fa-sign-out-alt forum-button" title="<?php echo $txt[161]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/user/action/logout.htm"><i class="fas fa-sign-out-alt forum-button" title="<?php echo $txt[161]; ?>"></i></a>
 <?php							
 				}				
 ?>					

@@ -68,7 +68,7 @@
 					
 						<!-- board name and description //-->
 						<div class="column col-6 col-sm-5 div-content">
-							<a href="index.php?page=viewboard&board_id=<?php echo intval($board[$j]['id']); ?>"><?php echo urldecode($board[$j]['name']); ?>
+							<a href="<?php echo urldecode($settings[0]['url']); ?>/viewboard/board_id/<?php echo intval($board[$j]['id']); ?>.htm"><?php echo urldecode($board[$j]['name']); ?>
 <?php									
 				if (intval($board[$j]['hidden']) == 1) echo ' <em>('.$txt[32].')</em>';
 				if (intval($board[$j]['readonly']) == 1) echo ' <em>('.$txt[31].')</em>';
@@ -85,7 +85,7 @@
 				
 						<!-- last post update //-->
 						<div class="column col-3 div-content">
-							<a href="index.php?page=viewtopic&topic_id=<?php echo $last_post_topic_id; ?>"><?php echo $last_post_title; ?></a>
+							<a href="<?php echo urldecode($settings[0]['url']); ?>/viewtopic/topic_id/<?php echo $last_post_topic_id; ?>.htm"><?php echo $last_post_title; ?></a>
 							<br><?php echo $txt[38]; ?> <?php echo $last_post_user; ?> <?php echo $txt[39]; ?> <?php echo $last_post_date; ?>
 						</div>
 					</div>

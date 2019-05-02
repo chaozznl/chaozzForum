@@ -1,9 +1,9 @@
 <?php if (!$called_from_index) Message ($txt[11], $txt[48], true); ?>
 <?php if (!isset($_SESSION['user_id'])) Message ($txt[11], $txt[94], true); ?>
 <?php
-	if (!empty($_GET['word'])) 
+	if (!empty($_POST['word'])) 
 	{ 
-		$word = urlencode($_GET['word']);
+		$word = urlencode($_POST['word']);
 		$search = chaozzdb_query ("SELECT * FROM post WHERE name ~= $word ORDER BY create_date DESC");
 		if (count($search) == 0)
 			Message($txt[11], $txt[128], false);
@@ -29,7 +29,7 @@
 									<i class="fas fa-file-alt forum-icon"></i>
 								</div>
 								<div class="column col-11">
-									<a href="index.php?page=viewtopic&topic_id=<?php echo intval($topic[0]['id']); ?>"><?php echo urldecode($topic[0]['name']); ?></a>
+									<a href="<?php echo urldecode($settings[0]['url']); ?>/viewtopic/topic_id/<?php echo intval($topic[0]['id']); ?>.htm"><?php echo urldecode($topic[0]['name']); ?></a>
 									<br>
 									<?php echo ReplaceBBC(urldecode($search[$i]['name'])); ?>
 								</div>
@@ -57,8 +57,7 @@
 					<div class="columns">		
 						<div class="column col-12 div-content">
 							<span class="div-label"><?php echo $txt[96]; ?></span>
-							<form method="GET" action="index.php">
-								<input type="hidden" name="page" value="search">
+							<form method="POST" action="<?php echo urldecode($settings[0]['url']); ?>/search.htm">
 								<input type="text" name="word" value="" maxlength="40" autofocus>
 								<input type="submit" value="<?php echo $txt[97]; ?>">
 							</form>

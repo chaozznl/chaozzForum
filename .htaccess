@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteRule (.*)/(.*)/(.*)/(.*)/(.*)\.htm$ index.php?page=$1&$2=$3&$4=$5 [L]
+RewriteRule (.*)/(.*)/(.*)\.htm$ index.php?page=$1&$2=$3 [L]
+RewriteRule (.*)\.htm$ index.php?page=$1 [L]

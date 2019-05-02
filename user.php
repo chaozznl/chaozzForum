@@ -41,7 +41,7 @@
 	if (!isset($_SESSION['user_id'])) 
 	{
 		 // captcha
-		include("./includes/simple-php-captcha.php");
+		include($url."/includes/simple-php-captcha.php");
 		$_SESSION['captcha'] = simple_php_captcha();
 ?>
 
@@ -54,7 +54,7 @@
 					</div>
 					<div class="columns">		
 						<div class="column col-12 div-content">					
-							<form method="POST" action="index.php?page=user">
+							<form method="POST" action="<?php echo $url; ?>/user.htm">
 								<input type="hidden" name="action" value="login">
 								<span class="div-label"><?php echo $txt[85]; ?><span>
 								<br>

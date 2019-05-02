@@ -159,7 +159,7 @@
 					</div>	
 					<div class="columns">		
 						<div class="column col-12 div-content">
-							<form method="POST" action="index.php?page=profile">
+							<form method="POST" action="<?php echo $url; ?>/profile.htm">
 								<input type="hidden" name="action" value="user.register">
 								<span class="div-label"><?php echo $txt[85]; ?></span>
 								<br>
@@ -231,7 +231,7 @@
 						<div class="column col-12 div-content">
 							<div class="columns">		
 								<div class="column col-2 div-center">
-									<img class="img-responsive" src="avatars/<?php echo urldecode($user[0]['avatar']); ?>">
+									<img class="img-responsive" src="<?php echo $url; ?>/avatars/<?php echo urldecode($user[0]['avatar']); ?>">
 								</div>	
 								<div class="column col-10">
 									<span class="div-label"><?php echo $txt[85]; ?>:</span> <?php echo urldecode($user[0]['name']); ?>
@@ -265,7 +265,7 @@
 					
 					<div class="columns">		
 						<div class="column col-12 div-content">
-							<form method="POST" action="index.php?page=profile">
+							<form method="POST" action="<?php echo $url; ?>/profile.htm">
 								<input type="hidden" name="action" value="user.update">
 								<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 								<span class="div-label"><?php echo $txt[126]; ?></span>
@@ -324,11 +324,11 @@
 						<div class="column col-12 div-content">
 							<?php echo $txt[145]; ?>: <?php echo $user[0]['ip']; ?>
 							<br>
-							<a href="?page=profile&action=user.banip&user_id=<?php echo $user_id; ?>"><i class="fas fa-user-slash forum-button"></i></a>
+							<a href="<?php echo $url; ?>/profile/action/user.banip/user_id/<?php echo $user_id; ?>.htm"><i class="fas fa-user-slash forum-button"></i></a>
 							<br>
-							<a href="?page=profile&action=user.unbanip&user_id=<?php echo $user_id; ?>"><i class="fas fa-user forum-button"></i></a>
+							<a href="<?php echo $url; ?>/profile/action/user.unbanip/user_id/<?php echo $user_id; ?>.htm"><i class="fas fa-user forum-button"></i></a>
 							<br>
-							<form method="POST" action="index.php?page=profile">
+							<form method="POST" action="<?php echo $url; ?>/profile.htm">
 								<input type="hidden" name="action" value="user.addtogroup">
 								<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 								<select name="group_id">
@@ -341,7 +341,7 @@
 								<input type="submit" value="<?php echo $txt[139]; ?>">
 							</form>
 							<br>
-							<form method="POST" action="index.php?page=profile">
+							<form method="POST" action="<?php echo $url; ?>/profile.htm">
 								<input type="hidden" name="action" value="user.delete">
 								<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 								<input type="checkbox" name="delete_content">

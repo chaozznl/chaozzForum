@@ -227,7 +227,7 @@
 					</div>	
 					<div class="columns">		
 						<div class="column col-12 div-content">
-							<form method="POST" action="index.php?page=post" name="postform">
+							<form method="POST" action="<?php echo $url; ?>/post.htm" name="postform">
 <?php
 		if ($action == "topic.add" || $action == "post.add")
 		{
