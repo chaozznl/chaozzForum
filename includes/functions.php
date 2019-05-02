@@ -168,7 +168,6 @@
 		$text = preg_replace("#\[edit\](.*?)\[/edit\]#si","<font color=orange><b>Edit</b></font>: \\1", $text);
 		foreach($smiles as $smile=>$image)
 			$text = str_replace($smile,'<i class="'.$image.' forum-smiley"></i>', $text);
-			$text = str_ireplace($smile,'<i class="'.$image.' forum-smiley"></i>', $text);
 		return $text;
 	}
 	
