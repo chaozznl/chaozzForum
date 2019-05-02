@@ -187,7 +187,10 @@
 		// not your post, or you can not delete your own post is set, and you're not staff? access denied
 		if (($post[0]['user_id'] != $_SESSION['user_id'] || intval($settings[0]['delete_own_posts']) == 0) && $_SESSION['group_id'] == $default_group_id)
 			Message($txt[11], $txt[49], true);
-
+		
+		$topic_id = $post[0]['topic_id']; // get the topic id, so we can go back to the topic after deleting it
+		include($lang_file); // update lang file with topic_id
+		
 		$result = chaozzdb_query ("DELETE FROM post WHERE id = $post_id");
 		Message ($txt[22], $txt[60], true);
 	}
