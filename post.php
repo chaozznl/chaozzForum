@@ -267,6 +267,7 @@
 							<a href="javascript:void(0);" onclick="surroundText('[url]', '[/url]', document.forms.postform.postmessage); return false;"><i class="fas fa-globe-americas forum-markup" title="url"></i></a>
 							<a href="javascript:void(0);" onclick="surroundText('[img]', '[/img]', document.forms.postform.postmessage); return false;"><i class="fas fa-image forum-markup" title="image"></i></a>
 							<a href="javascript:void(0);" onclick="surroundText('[quote]', '[/quote]', document.forms.postform.postmessage); return false;"><i class="fas fa-quote-right forum-markup" title="quote"></i></a>
+							<a href="javascript:void(0);" onclick="surroundText('[code]', '[/code]', document.forms.postform.postmessage); return false;"><i class="fas fa-file-code forum-markup" title="quote"></i></a>
 							<br>							
 							<input type="submit" value="<?php echo $txt[73]; ?>">
 						</div>

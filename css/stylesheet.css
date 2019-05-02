@@ -10,6 +10,10 @@ input, select, textarea {
     width: 100%;
 	margin-bottom: 5px;
 }
+pre
+{
+	background-color: #ffffff;
+}
 .forum-title
 {
 	font-size: 20px;
