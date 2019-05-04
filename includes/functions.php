@@ -161,11 +161,10 @@
 		$text = preg_replace("#\[b\](.*?)\[/b\]#si","<b>\\1</b>", $text);
 		$text = preg_replace("#\[u\](.*?)\[/u\]#si","<u>\\1</u>", $text);
 		$text = preg_replace("#\[i\](.*?)\[/i\]#si","<i>\\1</i>", $text);
-		$text = preg_replace("#\[url\](.*?)\[/url\]#si","<a href=\\1 target=_blank>\\1</a>", $text);
-		$text = preg_replace("#\[url=(.*?)\](.*?)\[/url\]#si","<a href=\\1 target=_blank>\\2</a>", $text);
-		$text = preg_replace("#\[img\](.*?)\[/img\]#si","<img src=\\1>", $text);
-		$text = preg_replace("#\[color=(.*?)\](.*?)\[/color\]#si","<font color=\\1>\\2</font>", $text);
-		$text = preg_replace("#\[edit\](.*?)\[/edit\]#si","<font color=orange><b>Edit</b></font>: \\1", $text);
+		$text = preg_replace("#\[url\](.*?)\[/url\]#si","<a href=\"\\1\" target=\"_blank\">\\1</a>", $text);
+		$text = preg_replace("#\[url=(.*?)\](.*?)\[/url\]#si","<a href=\"\\1\" target=\"_blank\">\\2</a>", $text);
+		$text = preg_replace("#\[img\](.*?)\[/img\]#si","<img class=\"img-responsive\" src=\"\\1\">", $text);
+		$text = preg_replace("#\[color=(.*?)\](.*?)\[/color\]#si","<span style=\"color: \\1\">\\2</span>", $text);
 		foreach($smiles as $smile=>$image)
 			$text = str_replace($smile,'<i class="'.$image.' forum-smiley"></i>', $text);
 		return $text;
