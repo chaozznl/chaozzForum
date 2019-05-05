@@ -152,6 +152,19 @@
 		}
 	}
 	
+	Function Youtube2Embed($match)
+	{
+		// conver https://www.youtube.com/watch?v=QnowcxcO2-0
+		// to <iframe width="560" height="315" src="https://www.youtube.com/embed/QnowcxcO2-0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		$match[0] = substr($match[0], 0, -10); // cut off [/youtube]
+		$match[0] = substr($match[0], 9); // cut off [youtube]
+		// now find everthing after the last /
+		$url_part = explode ("/", $match[0]); // explode to array on /
+		$url_part = array_filter($url_part, 'strlen'); // if the url ended on a / , the last entry in the array is empty, so lets remove empty entries
+		$video_code = $url_part[max(array_keys($url_part))]; // video code is the last part of the array
+		return '<iframe width="560" height="315" src="https://www.youtube.com/embed/'.$video_code.'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+	}
+	
 	Function Code2HTML($match)
 	{
 		// this replaces [ and ] for their html code counterparts, so that the bbc code inside pre tags are not processed
@@ -176,6 +189,7 @@
 		$text = preg_replace("#\[img\]((https?:\/\/)?\S*(jpg|png|jpeg|bmp|gif))\[/img\]#si","<img class=\"img-responsive\" src=\"\\1\">", $text);
 		$text = preg_replace("#\[thumb\]((https?:\/\/)?\S*(jpg|png|jpeg|bmp|gif))\[/thumb\]#si","<a href=\"\\1\" target=\"_blank\"><img class=\"img-responsive thumbnail\" src=\"\\1\"></a>", $text);
 		$text = preg_replace("#\[color=([\#a-fA-F0-9]{7})\](.*?)\[/color\]#si","<span style=\"color:$1\">\\2</span>", $text);
+		$text = preg_replace_callback("#\[youtube\](.*?)\[/youtube\]#si", "Youtube2Embed", $text);
 		foreach($smiles as $smile=>$image)
 			$text = str_replace($smile,'<i class="'.$image.' forum-smiley"></i>', $text);
 		return $text;
