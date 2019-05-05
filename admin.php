@@ -175,7 +175,7 @@
 								<br>
 								<span class="div-label"><?php echo $txt[149]; ?></span>
 								<br>
-								<input type="text" name="max_post_length" maxlength="4" value="<?php echo intval($settings[0]['max_post_length']); ?>">
+								<input type="text" name="max_post_length" maxlength="5" value="<?php echo intval($settings[0]['max_post_length']); ?>">
 								<br>
 								<span class="div-label"><?php echo $txt[112]; ?></span>
 								<br>

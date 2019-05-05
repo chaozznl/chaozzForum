@@ -14,6 +14,7 @@ pre
 {
 	background-color: #ffffff;
 	margin-top: 0px;
+	white-space: pre-wrap;
 }
 .forum-title
 {

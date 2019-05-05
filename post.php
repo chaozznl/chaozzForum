@@ -130,10 +130,24 @@
 	{
 		if (empty($_POST['title']) || empty($_POST['postmessage'])) 
 			Message($txt[11], $txt[53], true);
-
+		
+		// bypass max_input_vars limitation
+		$postdata = file_get_contents('php://input'); // contains post data: key1=value1&key2=value2 etc
+		$postdata = explode("&", $postdata); // explode all key=value pairs into an array
+		
+		for ($i = 0; $i < count($postdata); $i++)
+		{
+			$postvalue = explode("=", $postdata[$i]); // explode postdata into key/value
+			$key = trim($postvalue[0]);
+			$value = trim($postvalue[1]);
+			$postarray[$key] = $value; // create a new key/value array
+		}
+		
 		$save['topic_id'] = $topic_id;
-		$save['topic_title'] = urlencode($_POST['title']);
-		$save['post_message'] = urlencode($_POST['postmessage']);
+		$save['topic_title'] = $postarray['title'];
+		$save['post_message'] = $postarray['postmessage'];
+		//$save['topic_title'] = urlencode($_POST['title']);
+		//$save['post_message'] = urlencode($_POST['postmessage']);
 		
 		// check title length
 		if (strlen($save['topic_title']) < 1 || strlen($save['topic_title']) > intval($settings[0]['max_title_length']))
@@ -163,7 +177,19 @@
 		if (empty($_POST['postmessage'])) 
 			Message($txt[11], $txt[56], true);
 
-		$save['post_message'] = urlencode($_POST['postmessage']);
+		// bypass max_input_vars limitation
+		$postdata = file_get_contents('php://input'); // contains post data: key1=value1&key2=value2 etc
+		$postdata = explode("&", $postdata); // explode all key=value pairs into an array
+		
+		for ($i = 0; $i < count($postdata); $i++)
+		{
+			$postvalue = explode("=", $postdata[$i]); // explode postdata into key/value
+			$key = trim($postvalue[0]);
+			$value = trim($postvalue[1]);
+			$postarray[$key] = $value; // create a new key/value array
+		}
+		$save['post_message'] = urlencode($postarray['postmessage']);
+		//$save['post_message'] = urlencode($_POST['postmessage']);
 		
 		// check post length
 		if (strlen($save['post_message']) < 1 || strlen($save['post_message']) > intval($settings[0]['max_post_length']))
