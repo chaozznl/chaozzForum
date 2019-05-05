@@ -163,7 +163,7 @@
 		$text = preg_replace("#\[i\](.*?)\[/i\]#si","<i>\\1</i>", $text);
 		$text = preg_replace("#\[url\](.*?)\[/url\]#si","<a href=\"\\1\" target=\"_blank\">\\1</a>", $text);
 		$text = preg_replace("#\[url=(.*?)\](.*?)\[/url\]#si","<a href=\"\\1\" target=\"_blank\">\\2</a>", $text);
-		$text = preg_replace("#\[img\](.*?)\[/img\]#si","<img class=\"img-responsive\" src=\"\\1\">", $text);
+		$text = preg_replace("#\[img\]((https?:\/\/)?\S*(jpg|png|jpeg|bmp|gif))\[/img\]#si","<img class=\"img-responsive\" src=\"\\1\">", $text);
 		$text = preg_replace("#\[color=([\#a-fA-F0-9]{7})\](.*?)\[/color\]#si","<span style=\"color:$1\">\\2</span>", $text);
 		foreach($smiles as $smile=>$image)
 			$text = str_replace($smile,'<i class="'.$image.' forum-smiley"></i>', $text);
