@@ -152,9 +152,11 @@
 		}
 	}
 	
-	Function Prepare4Pre($match)
+	Function Code2HTML($match)
 	{
 		// this replaces [ and ] for their html code counterparts, so that the bbc code inside pre tags are not processed
+		$match[0] = substr($match[0], 0, -7); // cut off [/code]
+		$match[0] = substr($match[0], 6); // cut off [code]
 		$match[0] = str_replace ("[", "&#91;", $match[0]);
 		$match[0] = str_replace ("]", "&#93;", $match[0]);
 		return "<strong>code:</strong><pre>".$match[0]."</pre>";
@@ -164,7 +166,7 @@
 	{
 		global $smiles;
 		
-		$text = preg_replace_callback("#\[code\](.*?)\[/code\]#si","Prepare4Pre" , $text);
+		$text = preg_replace_callback("#\[code\](.*?)\[/code\]#si","Code2HTML" , $text);
 		$text = preg_replace("#\[quote\](.*?)\[/quote\]#si","<strong>quote:</strong><pre>\\1</pre>", $text);
 		$text = preg_replace("#\[b\](.*?)\[/b\]#si","<b>\\1</b>", $text);
 		$text = preg_replace("#\[u\](.*?)\[/u\]#si","<u>\\1</u>", $text);
