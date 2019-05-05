@@ -158,9 +158,18 @@
 		// to <iframe width="560" height="315" src="https://www.youtube.com/embed/QnowcxcO2-0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		$match[0] = substr($match[0], 0, -10); // cut off [/youtube]
 		$match[0] = substr($match[0], 9); // cut off [youtube]
-		// now find everthing after the last /
-		$url_part = explode ("/", $match[0]); // explode to array on /
-		$url_part = array_filter($url_part, 'strlen'); // if the url ended on a / , the last entry in the array is empty, so lets remove empty entries
+		
+		if (strpos($match[0], "=") !== false)
+		{
+			// old URL style of Youtube: https://www.youtube.com/watch?v=aKJ5qsL_Rm0
+			$url_part = explode ("=", $match[0]);
+		}
+		else
+		{
+			// new URL style of Youtube: https://youtu.be/aKJ5qsL_Rm0
+			$url_part = explode ("/", $match[0]); // explode to array on /
+			$url_part = array_filter($url_part, 'strlen'); // if the url ended on a / , the last entry in the array is empty, so lets remove empty entries
+		}
 		$video_code = $url_part[max(array_keys($url_part))]; // video code is the last part of the array
 		return '<iframe width="560" height="315" src="https://www.youtube.com/embed/'.$video_code.'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
 	}
