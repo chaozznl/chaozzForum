@@ -20,6 +20,10 @@ pre
 	margin-top: 0px;
 	white-space: pre-wrap;
 }
+.forum-list
+{
+	margin-top: -20px!important; /* compensate for the <br> after each </li> */
+}
 .forum-title
 {
 	font-size: 20px;

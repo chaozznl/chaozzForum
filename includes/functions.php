@@ -184,6 +184,17 @@
 		return "<strong>code:</strong><pre>".$match[0]."</pre>";
 	}
 	
+	Function RemoveBreak4LI($match)
+	{
+		// this replaces [ and ] for their html code counterparts, so that the bbc code inside pre tags are not processed
+		$match[0] = substr($match[0], 0, -5); // cut off [/li]
+		$match[0] = substr($match[0], 4); // cut off [li]
+		$match[0] = str_replace ("[", "&#91;", $match[0]);
+		$match[0] = str_replace ("]", "&#93;", $match[0]);
+		$match[0] = str_replace (PHP_EOL, "", $match[0]);
+		return '<li class="forum-list">'.$match[0].'</li>';
+	}
+	
 	Function replaceBBC($text)
 	{
 		global $smiles;
@@ -191,14 +202,15 @@
 		$text = preg_replace_callback("#\[code\](.*?)\[/code\]#si","Code2HTML" , $text);
 		$text = preg_replace("#\[quote\](.*?)\[/quote\]#si","<strong>quote:</strong><pre>\\1</pre>", $text);
 		$text = preg_replace("#\[b\](.*?)\[/b\]#si","<b>\\1</b>", $text);
-		$text = preg_replace("#\[u\](.*?)\[/u\]#si","<u>\\1</u>", $text);
-		$text = preg_replace("#\[i\](.*?)\[/i\]#si","<i>\\1</i>", $text);
 		$text = preg_replace("#\[url\](.*?)\[/url\]#si","<a href=\"\\1\" target=\"_blank\">\\1</a>", $text);
 		$text = preg_replace("#\[url=(.*?)\](.*?)\[/url\]#si","<a href=\"\\1\" target=\"_blank\">\\2</a>", $text);
+		$text = preg_replace("#\[i\](.*?)\[/i\]#si","<i>\\1</i>", $text);
 		$text = preg_replace("#\[img\]((https?:\/\/)?\S*(jpg|png|jpeg|bmp|gif))\[/img\]#si","<img class=\"img-responsive\" src=\"\\1\">", $text);
 		$text = preg_replace("#\[thumb\]((https?:\/\/)?\S*(jpg|png|jpeg|bmp|gif))\[/thumb\]#si","<a href=\"\\1\" target=\"_blank\"><img class=\"img-responsive thumbnail\" src=\"\\1\"></a>", $text);
 		$text = preg_replace("#\[color=([\#a-fA-F0-9]{7})\](.*?)\[/color\]#si","<span style=\"color:$1\">\\2</span>", $text);
 		$text = preg_replace_callback("#\[youtube\](.*?)\[/youtube\]#si", "Youtube2Embed", $text);
+		$text = preg_replace("#\[list\](.*?)\[/list\]#si","<ul>\\1</ul>", $text);
+		$text = preg_replace_callback("#\[li\](.*?)\[/li\]#si","RemoveBreak4LI", $text);
 		foreach($smiles as $smile=>$image)
 			$text = str_replace($smile,'<i class="'.$image.' forum-smiley"></i>', $text);
 		return $text;

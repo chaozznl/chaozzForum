@@ -1,7 +1,8 @@
 <?php if (!$called_from_index) Message ($txt[11], $txt[48], true); ?>
 			<div class="columns">		
 				<div class="column col-9 col-sm-12 col-mx-auto">
-					<?php echo urldecode($settings[0]['forum_name']); ?>
+					<i class="fas fa-folder-open forum-icon"></i>
+					<a href="<?php echo $url; ?>"><?php echo urldecode($settings[0]['forum_name']); ?></a>
 				</div>
 			</div>
 			<div class="columns">		
