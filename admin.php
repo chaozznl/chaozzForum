@@ -389,7 +389,7 @@
 								<br>
 								<span class="div-label"><?php echo $txt[158]; ?></span>
 								<br>
-								<input type="text" name="board_category" maxlength="250" value="">
+								<input type="text" name="board_description" maxlength="250" value="">
 								<br>
 								<span class="div-label"><?php echo $txt[26]; ?></span>
 								<br>
