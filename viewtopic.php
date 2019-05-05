@@ -189,7 +189,7 @@
 								
 								<!-- post //-->
 								<div class="column col-10 div-content">
-									<?php echo ReplaceBBC(nl2br2(urldecode($post[$i]['name']))); ?>
+									<?php echo ReplaceBBC(nl2br2(htmlentities(urldecode($post[$i]['name'])))); ?>
 								</div>	
 
 							</div>

@@ -238,7 +238,7 @@
 									<br>
 									<span class="div-label"><?php echo $txt[118]; ?>:</span> <?php echo Number2Date($user[0]['joindate']); ?>
 									<br>
-									<span class="div-label"><?php echo $txt[126]; ?>:</span> <?php echo urldecode($user[0]['signature']); ?>
+									<span class="div-label"><?php echo $txt[126]; ?>:</span> <?php echo htmlentities(urldecode($user[0]['signature'])); ?>
 									<br>
 									<span class="div-label"><?php echo $txt[47]; ?>:</span> <?php echo $postcount; ?>
 									<br>
