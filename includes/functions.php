@@ -156,7 +156,7 @@
 	{
 		global $smiles;
 		
-		$text = preg_replace("#\[code\](.*?)\[/code\]#si","<strong>code:</strong><pre>\\1</pre>", $text);
+		$text = preg_replace("#\[code\](.*?)\[/code\]#si",'<strong>code:</strong><pre>$1</pre>', $text);
 		$text = preg_replace("#\[quote\](.*?)\[/quote\]#si","<strong>quote:</strong><pre>\\1</pre>", $text);
 		$text = preg_replace("#\[b\](.*?)\[/b\]#si","<b>\\1</b>", $text);
 		$text = preg_replace("#\[u\](.*?)\[/u\]#si","<u>\\1</u>", $text);
@@ -164,6 +164,7 @@
 		$text = preg_replace("#\[url\](.*?)\[/url\]#si","<a href=\"\\1\" target=\"_blank\">\\1</a>", $text);
 		$text = preg_replace("#\[url=(.*?)\](.*?)\[/url\]#si","<a href=\"\\1\" target=\"_blank\">\\2</a>", $text);
 		$text = preg_replace("#\[img\]((https?:\/\/)?\S*(jpg|png|jpeg|bmp|gif))\[/img\]#si","<img class=\"img-responsive\" src=\"\\1\">", $text);
+		$text = preg_replace("#\[thumb\]((https?:\/\/)?\S*(jpg|png|jpeg|bmp|gif))\[/thumb\]#si","<a href=\"\\1\"><img class=\"img-responsive thumbnail\" src=\"\\1\"></a>", $text);
 		$text = preg_replace("#\[color=([\#a-fA-F0-9]{7})\](.*?)\[/color\]#si","<span style=\"color:$1\">\\2</span>", $text);
 		foreach($smiles as $smile=>$image)
 			$text = str_replace($smile,'<i class="'.$image.' forum-smiley"></i>', $text);

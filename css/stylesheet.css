@@ -3,6 +3,10 @@ img
 	border: 0; 
 	margin: 0px 2px 0px 2px;
 }
+.thumbnail 
+{
+	width: 300px;
+}
 input[type="text"] {
   flex: 1
 }

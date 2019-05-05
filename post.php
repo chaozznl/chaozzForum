@@ -188,7 +188,7 @@
 			$value = trim($postvalue[1]);
 			$postarray[$key] = $value; // create a new key/value array
 		}
-		$save['post_message'] = urlencode($postarray['postmessage']);
+		$save['post_message'] = $postarray['postmessage'];
 		//$save['post_message'] = urlencode($_POST['postmessage']);
 		
 		// check post length
@@ -295,6 +295,7 @@
 							<a href="javascript:void(0);" onclick="surroundText('[s]', '[/s]', document.forms.postform.postmessage); return false;"><i class="fas fa-strikethrough forum-markup" title="strikethrough"></i></a>
 							<a href="javascript:void(0);" onclick="surroundText('[url]', '[/url]', document.forms.postform.postmessage); return false;"><i class="fas fa-globe-americas forum-markup" title="url"></i></a>
 							<a href="javascript:void(0);" onclick="surroundText('[img]', '[/img]', document.forms.postform.postmessage); return false;"><i class="fas fa-image forum-markup" title="image"></i></a>
+							<a href="javascript:void(0);" onclick="surroundText('[thumb]', '[/thumb]', document.forms.postform.postmessage); return false;"><i class="fas fa-compress forum-markup" title="thumbnail"></i></a>
 							<a href="javascript:void(0);" onclick="surroundText('[quote]', '[/quote]', document.forms.postform.postmessage); return false;"><i class="fas fa-quote-right forum-markup" title="quote"></i></a>
 							<a href="javascript:void(0);" onclick="surroundText('[code]', '[/code]', document.forms.postform.postmessage); return false;"><i class="fas fa-file-code forum-markup" title="quote"></i></a>
 							<br>							
