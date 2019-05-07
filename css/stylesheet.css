@@ -74,8 +74,8 @@ pre
 .user-avatar
 {
 	display: inline-block!important;
-	width: 150px;
-	height: 150px;
+	/*width: 150px;
+	height: 150px;*/
 }
 .div-forum-name
 {
