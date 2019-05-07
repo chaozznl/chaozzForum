@@ -1,7 +1,16 @@
+body
+{
+	background-color: #f9f7f7;
+	color: #112d4e;
+}
 img 
 { 
 	border: 0; 
 	margin: 0px 2px 0px 2px;
+}
+a:link, a:hover, a:active, a:visited
+{
+	color: #112d4e;
 }
 .thumbnail 
 {
@@ -24,10 +33,6 @@ pre
 {
 	margin-top: -20px!important; /* compensate for the <br> after each </li> */
 }
-.forum-title
-{
-	font-size: 20px;
-}
 .header-button
 {
 	float: right;
@@ -39,7 +44,7 @@ pre
 .forum-icon
 {
 	font-size: 15px;
-	color: #5f6268;
+	/*color: #5f6268;*/
 	margin-left: 1px;
 	margin-right: 1px;
 }
@@ -60,7 +65,7 @@ pre
 .forum-button
 {
 	font-size: 35px;
-	color: #5f6268;
+	/*color: #5f6268;*/
 }
 .div-center
 {
@@ -70,23 +75,22 @@ pre
 .div-right
 {
 	text-align: right;
+	color: #ffffff;
 }
 .user-avatar
 {
 	display: inline-block!important;
-	/*width: 150px;
-	height: 150px;*/
 }
 .div-forum-name
 {
-	background-color: #e8d3ff;
-	color: #000000;
+	background-color: #112d4e;
+	color: #ffffff;
 	font-weight: bolder;
 	font-size: 40px;
 }
 .div-header
 {
-	background-color: #c6cfff;
+	background-color: #112d4e;
 	color: #000000;
 	padding-top: 5px;
 	padding-bottom: 5px;
@@ -100,28 +104,30 @@ pre
 }
 .div-title
 {
-	background-color: #c6cfff;
-	color: #000000;
+	background-color: #112d4e;
+	color: #ffffff;
 	padding-bottom: 5px;
 	font-weight: bold;
 }
 .div-content
 {
-	background-color: #f3f8ff;
+	background-color: #ffffff;
 	color: #000000;
 	padding-bottom: 5px;
 }
 .div-content-left
 {
-	background-color: #deecff;
-	color: #000000;
+	background-color: #dbe2ef;
+	color: #112d4e;
+	font-weight: bold;
 }
 .div-topic-options
 {
-	background-color: #e8d3ff;
+	background-color: #7d9abd;
 	color: #000000;
 	padding-top: 5px;
 	padding-bottom: 5px;
+	font-weight: bold;
 }
 .container
 {
@@ -129,7 +135,7 @@ pre
 }
 .div-admin-options
 {
-	background-color: #e8d3ff;
+	background-color: #7d9abd;
 	color: #000000;
 }
 .div-outline
@@ -139,7 +145,11 @@ pre
 	border-right: 1px solid #000000;
 	border-bottom: 1px solid #000000;
 }
-.div-label
+.div-welcome
+{
+	color: #f9f7f7;
+}
+.div-welcome-alias
 {
 	font-weight: bold;
 }

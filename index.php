@@ -69,12 +69,12 @@
 						<div class="column col-12 div-header">
 							<div class="columns">		
 								<!-- welcome message //-->
-								<div class="column col-7">
+								<div class="column col-7 div-welcome">
 <?php
 	if (!isset($_SESSION['user_id'])) 
 		echo $txt[114]; // welcome the guest
 	else 
-		echo $txt[113].' <span class="div-label">'.$_SESSION['name'].'</span>!'; // welcome the user
+		echo $txt[113].' <span class="div-welcome-alias">'.$_SESSION['name'].'</span>!'; // welcome the user
 ?>
 								</div>
 						
