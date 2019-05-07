@@ -97,7 +97,7 @@ pre
 }
 .div-news
 {
-	background-color: #bbc7d6;
+	background-color: #dbe2ef;
 	color: #000000;
 	font-weight: bolder;
 	font-size: 20px;
@@ -123,11 +123,12 @@ pre
 }
 .div-topic-options
 {
-	background-color: #7d9abd;
+	background-color: #bbc7d6;
 	color: #000000;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	font-weight: bold;
+	border-bottom: 1px solid #ffffff;
 }
 .container
 {
