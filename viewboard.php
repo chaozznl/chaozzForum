@@ -25,7 +25,7 @@
 			<div class="columns">		
 				<div class="column col-9 col-sm-12 col-mx-auto">
 					<div class="columns">		
-						<div class="column col-7">
+						<div class="column col-7 div-left">
 							<i class="fas fa-folder-open forum-icon"></i>
 							<a href="<?php echo $url; ?>"><?php echo urldecode($settings[0]['forum_name']); ?></a>
 							<i class="fas fa-chevron-right forum-icon"></i>

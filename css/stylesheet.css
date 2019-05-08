@@ -80,10 +80,13 @@ pre
 	text-align: center;
 	padding-top: 8px;
 }
+.div-left
+{
+	margin-top: 10px;
+}
 .div-right
 {
 	text-align: right;
-	color: #ffffff!important;
 }
 .user-avatar
 {

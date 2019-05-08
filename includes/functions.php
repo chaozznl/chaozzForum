@@ -171,7 +171,7 @@
 			$url_part = array_filter($url_part, 'strlen'); // if the url ended on a / , the last entry in the array is empty, so lets remove empty entries
 		}
 		$video_code = $url_part[max(array_keys($url_part))]; // video code is the last part of the array
-		return '<iframe width="560" height="315" src="https://www.youtube.com/embed/'.$video_code.'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+		return '<div class="video-responsive"><iframe width="560" height="315" src="https://www.youtube.com/embed/'.$video_code.'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>';
 	}
 	
 	Function Code2HTML($match)
