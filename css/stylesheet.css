@@ -11,6 +11,7 @@ img
 a:link, a:hover, a:active, a:visited
 {
 	color: #112d4e;
+	font-weight: bold;
 }
 .thumbnail 
 {

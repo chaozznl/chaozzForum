@@ -46,9 +46,11 @@
 						if (count($post) > 0) 
 						{ 
 							$last_post_id = intval($post[0]['id']);
-							$last_post_title = urldecode($topic[$k]['name']);
+							$last_post_title = htmlentities(urldecode($topic[$k]['name']));
 							$last_post_topic_id = intval($topic[$k]['id']);
-							$last_post_user = urldecode($topic[$k]['last_poster']);
+							$last_post_user_id = intval($topic[$k]['last_poster_id']);
+							$last_user = chaozzdb_query ("SELECT * FROM user WHERE id = $last_post_user_id"); // query user table for the name of this user
+							$last_post_user = urldecode($last_user[0]['name']);
 							$last_post_date = Number2Date($post[0]['create_date']); // convert database date format to readable format
 						}				
 					}
@@ -87,7 +89,7 @@
 						<!-- last post update //-->
 						<div class="column col-3 div-content">
 							<a href="<?php echo urldecode($settings[0]['url']); ?>/viewtopic/topic_id/<?php echo $last_post_topic_id; ?>.htm"><?php echo $last_post_title; ?></a>
-							<br><?php echo $txt[38]; ?> <?php echo $last_post_user; ?> <?php echo $txt[39]; ?> <?php echo $last_post_date; ?>
+							<br><?php echo $txt[38]; ?> <a href="<?php echo $url; ?>/profile/user_id/<?php echo intval($last_post_user_id); ?>.htm"><?php echo $last_post_user; ?></a> <?php echo $txt[39]; ?> <?php echo $last_post_date; ?>
 						</div>
 					</div>
 <?php					

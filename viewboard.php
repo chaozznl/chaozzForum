@@ -112,7 +112,7 @@
 				if (intval($topic[$i]['sticky']) == 1) echo '<i class="fas fa-thumbtack forum-icon"></i>';
 				if (intval($topic[$i]['locked']) == 1) echo '<i class="fas fa-lock forum-icon"></i>';
 ?>				
-									<a href="<?php echo $url; ?>/viewtopic/topic_id/<?php echo intval($topic[$i]['id']); ?>.htm"><?php echo urldecode($topic[$i]['name']); ?></a>
+									<a href="<?php echo $url; ?>/viewtopic/topic_id/<?php echo intval($topic[$i]['id']); ?>.htm"><?php echo htmlentities(urldecode($topic[$i]['name'])); ?></a>
 									<?php echo $txt[38]; ?> <?php echo urldecode($user[0]['name']); ?>
 								</div>	
 								<div class="column col-2 div-content">
@@ -120,7 +120,7 @@
 								</div>	
 								<div class="column col-3 div-content">
 									<td width="300" class="post"><?php $txt[143]; ?> <?php echo Number2Date($reply[0]['create_date']); ?> 
-									<?php echo $txt[38]; ?> <?php echo urldecode($user[0]['name']); ?>
+									<?php echo $txt[38]; ?> <a href="<?php echo $url; ?>/profile/user_id/<?php echo intval($user[0]['id']); ?>.htm"><?php echo urldecode($user[0]['name']); ?></a>
 								</div>	
 							</div>
 						</div>

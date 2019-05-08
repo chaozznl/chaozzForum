@@ -198,7 +198,7 @@
 		if ($post_id == 0) 
 		{
 			$result = chaozzdb_query ("INSERT INTO post VALUES ({$save['post_message']}, $topic_id, $user_id, $now, 0)"); // and add the post
-			$result = chaozzdb_query ("UPDATE topic SET update_date = $now, last_poster = {$_SESSION['name']} WHERE id = $topic_id"); // update the topic
+			$result = chaozzdb_query ("UPDATE topic SET update_date = $now, last_poster_id = {$_SESSION['user_id']} WHERE id = $topic_id"); // update the topic
 			Message ($txt[22], $txt[57], true);
 		}
 		else 
