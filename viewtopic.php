@@ -20,7 +20,7 @@
 	{
 		// is the topic unlocked and the board not readonly, or are you staff?
 		if ((intval($topic[0]['locked']) == 0 && intval($board[0]['readonly']) == 0 && isset($_SESSION['user_id'])) || (isset($_SESSION['user_id']) && $_SESSION['group_id'] < 3)) 
-			$post_reply_link = '<a href="'.$url.'/post/action/post.add/topic_id/'.intval($topic[0]['id']).'.htm"><i class="fas fa-plus-square forum-button" title="'.$txt[163].'"></i></a>';
+			$post_reply_link = '<a href="'.$url.'/post/action/post.add/topic_id/'.intval($topic[0]['id']).'.htm"><i class="fas fa-plus-square forum-button-content" title="'.$txt[163].'"></i></a>';
 	}	
 ?>
 			<!-- // navigation //-->
@@ -63,7 +63,7 @@
 					<div class="columns">		
 						<div class="column col-12 div-title">
 							<i class="fas fa-file-alt forum-icon"></i>
-							<?php echo $txt[110]; ?>: <?php echo urldecode($topic[0]['name']); ?>
+							<?php echo $txt[110]; ?>: <?php echo htmlentities(urldecode($topic[0]['name'])); ?>
 <?php				
 	if (intval($topic[0]['sticky']) == 1) echo '<i class="fas fa-thumbtack forum-icon" title="'.$txt[164].'"></i>';
 	if (intval($topic[0]['locked']) == 1) echo '<i class="fas fa-lock forum-icon" title="'.$txt[165].'"></i>';
@@ -124,7 +124,7 @@
 			{
 ?>				
 									<a href="<?php echo $url; ?>/post/action/topic.delete/topic_id/<?php echo $topic[0]['id']; ?>.htm" onclick="return confirm('<?php echo $txt[144]; ?>')">
-									<i class="fas fa-trash-alt forum-button" title="<?php echo $txt[166]; ?>"></i></a>
+									<i class="fas fa-trash-alt forum-button-content" title="<?php echo $txt[166]; ?>"></i></a>
 <?php									
 			}
 			
@@ -139,7 +139,7 @@
 			{
 ?>				
 									<a href="<?php echo $url; ?>/post/action/topic.edit/topic_id/<?php echo intval($topic[0]['id']); ?>.htm">
-									<i class="fas fa-edit forum-button" title="<?php echo $txt[69]; ?>"></i></a>
+									<i class="fas fa-edit forum-button-content" title="<?php echo $txt[69]; ?>"></i></a>
 <?php									
 			}
 		}
@@ -151,7 +151,7 @@
 			{
 ?>				
 									<a href="<?php echo $url; ?>/post/action/post.delete/post_id/<?php echo intval($post[$i]['id']); ?>.htm" onclick="return confirm('<?php echo $txt[144]; ?>')">
-									<i class="fas fa-trash-alt forum-button" title="<?php echo $txt[167]; ?>"></i></a>
+									<i class="fas fa-trash-alt forum-button-content" title="<?php echo $txt[167]; ?>"></i></a>
 <?php									
 			}
 			
@@ -165,7 +165,7 @@
 			{
 ?>				
 									<a href="<?php echo $url; ?>/post/action/post.edit/post_id/<?php echo intval($post[$i]['id']); ?>.htm">
-									<i class="fas fa-edit forum-button" title="<?php echo $txt[70]; ?>"></i></a>
+									<i class="fas fa-edit forum-button-content" title="<?php echo $txt[70]; ?>"></i></a>
 <?php									
 			}
 		}
@@ -229,14 +229,14 @@
 			}
 			
 			if (intval($topic[0]['locked']) == 0) 
-				echo '<a href="'.$url.'/post/action/topic.lock/topic_id/'.$topic[0]['id'].'.htm"><i class="fas fa-lock forum-button" title="'.$txt[168].'"></i></a>';
+				echo '<a href="'.$url.'/post/action/topic.lock/topic_id/'.$topic[0]['id'].'.htm"><i class="fas fa-lock forum-button-content" title="'.$txt[168].'"></i></a>';
 			else
-				echo '<a href="'.$url.'/post/action/topic.unlock/topic_id/'.$topic[0]['id'].'.htm"><i class="fas fa-unlock-alt forum-button" title="'.$txt[169].'"></i></a>';
+				echo '<a href="'.$url.'/post/action/topic.unlock/topic_id/'.$topic[0]['id'].'.htm"><i class="fas fa-unlock-alt forum-button-content" title="'.$txt[169].'"></i></a>';
 		
 			if (intval($topic[0]['sticky']) == 0) 
-				echo '<a href="'.$url.'/post/action/topic.sticky/topic_id/'.$topic[0]['id'].'.htm"><i class="fas fa-thumbtack forum-button" title="'.$txt[170].'"></i></a>';
+				echo '<a href="'.$url.'/post/action/topic.sticky/topic_id/'.$topic[0]['id'].'.htm"><i class="fas fa-thumbtack forum-button-content" title="'.$txt[170].'"></i></a>';
 			else
-				echo '<a href="'.$url.'/post/action/topic.unsticky/topic_id/'.$topic[0]['id'].'.htm"><i class="fas fa-thumbtack forum-button" title="'.$txt[171].'"></i></a>';
+				echo '<a href="'.$url.'/post/action/topic.unsticky/topic_id/'.$topic[0]['id'].'.htm"><i class="fas fa-thumbtack forum-button-content" title="'.$txt[171].'"></i></a>';
 ?>		
 								</div>
 							</div>

@@ -44,9 +44,7 @@ pre
 .forum-icon
 {
 	font-size: 15px;
-	/*color: #5f6268;*/
-	margin-left: 1px;
-	margin-right: 1px;
+	margin-left: 5px;
 }
 .forum-smiley
 {
@@ -62,10 +60,19 @@ pre
 	margin-left: 2px;
 	margin-right: 2px;
 }
-.forum-button
+.forum-button-header
 {
 	font-size: 35px;
-	/*color: #5f6268;*/
+	color: #ffffff;
+}
+.forum-button-content
+{
+	font-size: 35px;
+	color: #112d4e;
+}
+.forum-button-main
+{
+	font-size: 35px;
 }
 .div-center
 {
@@ -75,7 +82,7 @@ pre
 .div-right
 {
 	text-align: right;
-	color: #ffffff;
+	color: #ffffff!important;
 }
 .user-avatar
 {
@@ -138,6 +145,7 @@ pre
 {
 	background-color: #7d9abd;
 	color: #000000;
+	border-top: 1px solid #ffffff;
 }
 .div-outline
 {

@@ -80,30 +80,30 @@
 						
 								<!-- forum options //-->
 								<div class="column col-5 div-right">
-									<a href="<?php echo $url; ?>/"><i class="fas fa-home forum-button" title="<?php echo $txt[160]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/"><i class="fas fa-home forum-button-header" title="<?php echo $txt[160]; ?>"></i></a>
 <?php
 	if (!isset($_SESSION['user_id'])) 
 	{
 ?>					
-									<a href="<?php echo $url; ?>/profile.htm"><i class="fas fa-user-edit forum-button" title="<?php echo $txt[84]; ?>"></i></a>
-									<a href="<?php echo $url; ?>/user.htm"><i class="fas fa-sign-in-alt forum-button" title="<?php echo $txt[105]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/profile.htm"><i class="fas fa-user-edit forum-button-header" title="<?php echo $txt[84]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/user.htm"><i class="fas fa-sign-in-alt forum-button-header" title="<?php echo $txt[105]; ?>"></i></a>
 <?php					
 	}
 	else 
 	{
 ?>					
-									<a href="<?php echo $url; ?>/profile.htm"><i class="fas fa-user-edit forum-button" title="<?php echo $txt[83]; ?>"></i></a>
-									<a href="<?php echo $url; ?>/search.htm"><i class="fas fa-search forum-button" title="<?php echo $txt[97]; ?>"></i></a>
-									<a href="<?php echo $url; ?>/members.htm"><i class="fas fa-users forum-button" title="<?php echo $txt[44]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/profile.htm"><i class="fas fa-user-edit forum-button-header" title="<?php echo $txt[83]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/search.htm"><i class="fas fa-search forum-button-header" title="<?php echo $txt[97]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/members.htm"><i class="fas fa-users forum-button-header" title="<?php echo $txt[44]; ?>"></i></a>
 <?php					
 	if ($_SESSION['group_id'] == 1)
 	{
 ?>						
-									<a href="<?php echo $url; ?>/admin.htm"><i class="fas fa-toolbox forum-button" title="<?php echo $txt[13]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/admin.htm"><i class="fas fa-toolbox forum-button-header" title="<?php echo $txt[13]; ?>"></i></a>
 <?php							
 	}
 ?>
-									<a href="<?php echo $url; ?>/user/action/logout.htm"><i class="fas fa-sign-out-alt forum-button" title="<?php echo $txt[161]; ?>"></i></a>
+									<a href="<?php echo $url; ?>/user/action/logout.htm"><i class="fas fa-sign-out-alt forum-button-header" title="<?php echo $txt[161]; ?>"></i></a>
 <?php							
 				}				
 ?>					

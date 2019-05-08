@@ -61,9 +61,9 @@
 						<div class="column col-1 col-sm-2 div-center div-content-left">
 <?php								
 				if (intval($board[$j]['readonly']) == 1) 
-					echo '<i class="fas fa-lock forum-button"></i>';
+					echo '<i class="fas fa-lock forum-button-content"></i>';
 				else 
-					echo  '<i class="fas fa-file-alt forum-button"></i>';
+					echo  '<i class="fas fa-file-alt forum-button-content"></i>';
 ?>				
 						</div>
 					
@@ -112,7 +112,7 @@
 						<div class="column col-12 col-mx-auto">
 							<div class="columns">		
 								<div class="column col-1 col-sm-2 div-center div-content-left">
-									<i class="fas fa-chart-pie forum-button"></i>
+									<i class="fas fa-chart-pie forum-button-content"></i>
 								</div>
 								<div class="column col-11 col-sm-10 col-sm-10 div-content">
 <?php	

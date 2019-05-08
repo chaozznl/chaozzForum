@@ -15,7 +15,7 @@
 		
 		// allowed here, but can you post
 		if ($board[0]['readonly'] == 0 || $_SESSION['group_id'] < $default_group_id) 
-			$post_topic_link = '<a href="'.$url.'/post/action/topic.add/board_id/'.intval($board[0]['id']).'.htm"><i class="fas fa-plus-square forum-button" title="'.$txt[162].'"></i></a>';
+			$post_topic_link = '<a href="'.$url.'/post/action/topic.add/board_id/'.intval($board[0]['id']).'.htm"><i class="fas fa-plus-square forum-button-content" title="'.$txt[162].'"></i></a>';
 	}
 	
 	// get some details from the category
