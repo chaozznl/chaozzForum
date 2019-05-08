@@ -97,7 +97,7 @@
 		$setting['id'] = "1";	// id = 1 record for the settings
 		$setting['forum_title'] = urlencode($_POST['forum_title']);
 		$setting['forum_subtitle'] = urlencode($_POST['forum_subtitle']);
-		$setting['url'] = urlencode($_POST['forum_url']);
+		$setting['url'] = urlencode(rtrim($_POST['forum_url'], '/\\')); // trim off trailing / from forum url
 		$setting['maintenance_mode'] = intval($_POST['maintenance_mode']);
 		$setting['topics_per_page'] = intval($_POST['topics_per_page']);
 		$setting['posts_per_page'] = intval($_POST['posts_per_page']);
