@@ -92,17 +92,21 @@ pre
 {
 	display: inline-block!important;
 }
-.div-forum-name
+.div-forum-title
 {
-	background-color: #112d4e;
 	color: #ffffff;
 	font-weight: bolder;
 	font-size: 40px;
 }
+.div-forum-subtitle
+{
+	color: #ffffff;
+	font-weight: bolder;
+	font-size: 20px;
+}
 .div-header
 {
 	background-color: #112d4e;
-	color: #000000;
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
@@ -165,6 +169,10 @@ pre
 	color: #f9f7f7;
 }
 .div-welcome-alias
+{
+	font-weight: bold;
+}
+.div-label
 {
 	font-weight: bold;
 }

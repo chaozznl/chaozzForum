@@ -95,7 +95,8 @@
 	if ($action == "save.settings") 
 	{
 		$setting['id'] = "1";	// id = 1 record for the settings
-		$setting['forum_name'] = urlencode($_POST['forum_title']);
+		$setting['forum_title'] = urlencode($_POST['forum_title']);
+		$setting['forum_subtitle'] = urlencode($_POST['forum_subtitle']);
 		$setting['url'] = urlencode($_POST['forum_url']);
 		$setting['maintenance_mode'] = intval($_POST['maintenance_mode']);
 		$setting['topics_per_page'] = intval($_POST['topics_per_page']);
@@ -113,7 +114,7 @@
 		{
 			Message ($txt[11], $txt[124], true);
 		}
-		chaozzdb_query ("UPDATE settings SET forum_name = {$setting['forum_name']}, url = {$setting['url']}, maintenance_mode = {$setting['maintenance_mode']}, topics_per_page = {$setting['topics_per_page']}, posts_per_page = {$setting['posts_per_page']}, language = {$setting['language']}, news = {$setting['news']}, edit_limit = {$setting['edit_limit']}, guest_view = {$setting['guest_view']}, max_username_length = {$setting['max_username_length']}, max_signature_length = {$setting['max_signature_length']}, max_title_length = {$setting['max_title_length']}, max_post_length = {$setting['max_post_length']}  WHERE id = {$setting['id']}"); 
+		chaozzdb_query ("UPDATE settings SET forum_title = {$setting['forum_title']}, forum_subtitle = {$setting['forum_subtitle']}, url = {$setting['url']}, maintenance_mode = {$setting['maintenance_mode']}, topics_per_page = {$setting['topics_per_page']}, posts_per_page = {$setting['posts_per_page']}, language = {$setting['language']}, news = {$setting['news']}, edit_limit = {$setting['edit_limit']}, guest_view = {$setting['guest_view']}, max_username_length = {$setting['max_username_length']}, max_signature_length = {$setting['max_signature_length']}, max_title_length = {$setting['max_title_length']}, max_post_length = {$setting['max_post_length']}  WHERE id = {$setting['id']}"); 
 		Message ($txt[22], $txt[10], false);
 	}
 	
@@ -139,7 +140,11 @@
 								<input type="hidden" name="action" value="save.settings">
 								<span class="div-label"><?php echo $txt[14]; ?></span>
 								<br>
-								<input type="text" name="forum_title" maxlength="40" value="<?php echo urldecode($settings[0]['forum_name']); ?>">
+								<input type="text" name="forum_title" maxlength="40" value="<?php echo urldecode($settings[0]['forum_title']); ?>">
+								<br>
+								<span class="div-label"><?php echo $txt[172]; ?></span>
+								<br>
+								<input type="text" name="forum_subtitle" maxlength="40" value="<?php echo urldecode($settings[0]['forum_subtitle']); ?>">
 								<br>
 								<span class="div-label"><?php echo $txt[15]; ?></span>
 								<br>

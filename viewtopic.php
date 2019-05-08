@@ -29,7 +29,7 @@
 					<div class="columns">		
 						<div class="column col-7 div-left">
 							<i class="fas fa-folder-open forum-icon"></i>
-							<a href="<?php echo $url; ?>"><?php echo urldecode($settings[0]['forum_name']); ?></a>
+							<a href="<?php echo $url; ?>"><?php echo urldecode($settings[0]['forum_title']); ?></a>
 							<i class="fas fa-chevron-right forum-icon"></i>
 							<a href="<?php echo $url; ?>"><?php echo urldecode($category[0]['name']); ?></a>
 							<i class="fas fa-chevron-right"></i>
@@ -196,7 +196,6 @@
 						</div>	
 					</div>	
 <?php			
-					//ReplaceBBC(urldecode($user[0]['signature']))."&nbsp;</small>";
 		}
 	
 		if (isset($_SESSION['user_id']) && $_SESSION['group_id'] < 3)

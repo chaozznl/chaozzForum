@@ -167,4 +167,7 @@
 	$txt[169] = "Unlock topic";
 	$txt[170] = "Pin topic";
 	$txt[171] = "Unpin topic";
+	$txt[172] = "Forum subtitle";
+	$txt[173] = "Replies";
+	$txt[174] = "Last reply";
 ?>

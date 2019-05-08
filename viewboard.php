@@ -27,7 +27,7 @@
 					<div class="columns">		
 						<div class="column col-7 div-left">
 							<i class="fas fa-folder-open forum-icon"></i>
-							<a href="<?php echo $url; ?>"><?php echo urldecode($settings[0]['forum_name']); ?></a>
+							<a href="<?php echo $url; ?>"><?php echo urldecode($settings[0]['forum_title']); ?></a>
 							<i class="fas fa-chevron-right forum-icon"></i>
 							<a href="<?php echo $url; ?>"><?php echo urldecode($category[0]['name']); ?></a>
 							<i class="fas fa-chevron-right"></i>
@@ -88,7 +88,17 @@
 ?>			
 					<div class="columns">		
 						<div class="column col-12 div-title">
-							<?php echo $title; ?>
+							<div class="columns">		
+								<div class="column col-7">
+									<?php echo $title; ?>
+								</div>	
+								<div class="column col-2">
+									<?php echo $txt[173]; ?>
+								</div>	
+								<div class="column col-3">
+									<?php echo $txt[174]; ?>
+								</div>	
+							</div>	
 						</div>
 					</div>	
 <?php			

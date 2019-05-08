@@ -37,7 +37,7 @@
 		<meta name="description" content="chaozzForum - Flatfile Forum Software" />
 		<meta name="keywords" content="Forum, Flatfile, No database, Simple, Boards, Forums, chaozzForum, chaozzDB" />
 		<meta name="author" content="E. Wenners / www.chaozz.nl" />
-		<title><?php echo urldecode($settings[0]['forum_name']) ?></title>
+		<title><?php echo urldecode($settings[0]['forum_title']) ?></title>
 		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
 		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
 		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
@@ -60,64 +60,66 @@
 			<div class="columns">		
 				<div class="column col-9 col-sm-12 col-mx-auto div-outline">
 					<div class="columns">		
-						<div class="column col-12 div-forum-name div-forum-name">
-							<?php echo urldecode($settings[0]['forum_name']); ?>
+						<div class="column col-12 div-header">
+							<div class="div-forum-title"><?php echo urldecode($settings[0]['forum_title']); ?></div>
+							<div class="div-forum-subtitle"><?php echo urldecode($settings[0]['forum_subtitle']); ?></div>
 						</div>
 					</div>
 			
 					<div class="columns">		
-						<div class="column col-12 div-header">
-							<div class="columns">		
-								<!-- welcome message //-->
-								<div class="column col-7 div-welcome">
-<?php
-	if (!isset($_SESSION['user_id'])) 
-		echo $txt[114]; // welcome the guest
-	else 
-		echo $txt[113].' <span class="div-welcome-alias">'.$_SESSION['name'].'</span>!'; // welcome the user
-?>
-								</div>
-						
-								<!-- forum options //-->
-								<div class="column col-5 div-right">
-									<a href="<?php echo $url; ?>/"><i class="fas fa-home forum-button-header" title="<?php echo $txt[160]; ?>"></i></a>
+						<div class="column col-12 div-header div-right">
+						<!-- forum options //-->
+							<a href="<?php echo $url; ?>/"><i class="fas fa-home forum-button-header" title="<?php echo $txt[160]; ?>"></i></a>
 <?php
 	if (!isset($_SESSION['user_id'])) 
 	{
 ?>					
-									<a href="<?php echo $url; ?>/profile.htm"><i class="fas fa-user-edit forum-button-header" title="<?php echo $txt[84]; ?>"></i></a>
-									<a href="<?php echo $url; ?>/user.htm"><i class="fas fa-sign-in-alt forum-button-header" title="<?php echo $txt[105]; ?>"></i></a>
+							<a href="<?php echo $url; ?>/profile.htm"><i class="fas fa-user-edit forum-button-header" title="<?php echo $txt[84]; ?>"></i></a>
+							<a href="<?php echo $url; ?>/user.htm"><i class="fas fa-sign-in-alt forum-button-header" title="<?php echo $txt[105]; ?>"></i></a>
 <?php					
 	}
 	else 
 	{
 ?>					
-									<a href="<?php echo $url; ?>/profile.htm"><i class="fas fa-user-edit forum-button-header" title="<?php echo $txt[83]; ?>"></i></a>
-									<a href="<?php echo $url; ?>/search.htm"><i class="fas fa-search forum-button-header" title="<?php echo $txt[97]; ?>"></i></a>
-									<a href="<?php echo $url; ?>/members.htm"><i class="fas fa-users forum-button-header" title="<?php echo $txt[44]; ?>"></i></a>
+							<a href="<?php echo $url; ?>/profile.htm"><i class="fas fa-user-edit forum-button-header" title="<?php echo $txt[83]; ?>"></i></a>
+							<a href="<?php echo $url; ?>/search.htm"><i class="fas fa-search forum-button-header" title="<?php echo $txt[97]; ?>"></i></a>
+							<a href="<?php echo $url; ?>/members.htm"><i class="fas fa-users forum-button-header" title="<?php echo $txt[44]; ?>"></i></a>
 <?php					
-	if ($_SESSION['group_id'] == 1)
-	{
+		if ($_SESSION['group_id'] == 1)
+		{
 ?>						
-									<a href="<?php echo $url; ?>/admin.htm"><i class="fas fa-toolbox forum-button-header" title="<?php echo $txt[13]; ?>"></i></a>
+							<a href="<?php echo $url; ?>/admin.htm"><i class="fas fa-toolbox forum-button-header" title="<?php echo $txt[13]; ?>"></i></a>
 <?php							
-	}
+		}
 ?>
-									<a href="<?php echo $url; ?>/user/action/logout.htm"><i class="fas fa-sign-out-alt forum-button-header" title="<?php echo $txt[161]; ?>"></i></a>
+							<a href="<?php echo $url; ?>/user/action/logout.htm"><i class="fas fa-sign-out-alt forum-button-header" title="<?php echo $txt[161]; ?>"></i></a>
 <?php							
-				}				
+	}				
 ?>					
-								</div>	
-							</div>
-						</div>
-					</div>	
+						</div>	
+					</div>
 <?php
 	if ($settings[0]['news'] != "") 
 	{
 ?>				
 					<div class="columns">		
 						<div class="column col-12 div-news">
-							<?php echo $txt[116]; ?>: <?php echo urldecode($settings[0]['news']); ?>
+								<div class="columns">
+									<!-- news //-->
+									<div class="column col-9">
+										<?php echo $txt[116]; ?>: <?php echo ReplaceBBC(urldecode($settings[0]['news'])); ?>
+									</div>	
+									<!-- welcome message //-->
+									<div class="column col-3 div-right">
+<?php
+	if (!isset($_SESSION['user_id'])) 
+		echo $txt[114]; // welcome the guest
+	else 
+		echo $txt[113].' <span class="div-welcome-alias">'.$_SESSION['name'].'</span>!'; // welcome the user
+?>
+									</div>
+									
+								</div>
 						</div>
 					</div>
 <?php			
