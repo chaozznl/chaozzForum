@@ -57,11 +57,11 @@
 								<div class="column col-3">
 									<?php echo $num_posts; ?>
 								</div>
-<?php								
-	}
-?>
 							</div>
 						</div>
 					</div>
+<?php								
+	}
+?>
 				</div>
 			</div>	
