@@ -159,7 +159,7 @@
 		
 		if ($topic_id == 0) 
 		{
-			$topic_id = chaozzdb_query ("INSERT INTO topic VALUES ({$save['topic_title']}, $user_id, $board_id, 0, 0, $now, $now, {$_SESSION['name']})"); // create topic
+			$topic_id = chaozzdb_query ("INSERT INTO topic VALUES ({$save['topic_title']}, $user_id, $board_id, 0, 0, $now, $now, {$_SESSION['user_id']})"); // create topic
 			$result = chaozzdb_query ("INSERT INTO post VALUES ({$save['post_message']}, $topic_id, $user_id, $now, 0)"); // and add the post
 			include($lang_file); // update lang file with new topic id
 			Message ($txt[22], $txt[54], true);
