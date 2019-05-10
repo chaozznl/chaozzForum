@@ -115,7 +115,7 @@
 			Message ($txt[11], $txt[136], true);
 			
 		// validate the username
-		if (!ctype_alnum($save['name']))
+		if (!ctype_alnum(urldecode($save['name'])))
 			Message ($txt[11], $txt[132], true);
 		
 		// username length check
@@ -127,7 +127,7 @@
 			Message ($txt[11], $txt[151], true);
 		
 		// validate the avatar
-		if ($save['avatar'] == "" || preg_match('/[^a-z_\-.0-9]/i', $save['avatar']) || strlen($save['avatar'] > 15))
+		if (urldecode($save['avatar']) == "" || preg_match('/[^a-z_\-.0-9]/i', urldecode($save['avatar'])) || strlen($save['avatar'] > 15))
 			$save['avatar'] = urlencode("default.png");
 		
 		// validate password
@@ -135,7 +135,7 @@
 			Message ($txt[11], $txt[134], true);
 		
 		// validate email address
-		if (!filter_var($save['email'], FILTER_VALIDATE_EMAIL))
+		if (!filter_var(urldecode($_POST['email']), FILTER_VALIDATE_EMAIL))
 			Message ($txt[11], $txt[133], true);
 		
 		// save this user to the database (name	password	group_id	email	joindate	ip	avatar	signature)
