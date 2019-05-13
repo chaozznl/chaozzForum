@@ -26,8 +26,11 @@ input, select, textarea {
 }
 pre
 {
-	background-color: #ffffff;
+	background-color: #000000 !important;
+	color: #ffffff;
+	border-radius: 5px;
 	margin-top: 0px;
+	padding: 5px;
 	white-space: pre-wrap;
 }
 .forum-list
