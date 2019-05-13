@@ -30,6 +30,7 @@ pre
 	color: #ffffff;
 	border-radius: 5px;
 	margin-top: 0px;
+	margin-bottom: -10px;
 	padding: 5px;
 	white-space: pre-wrap;
 }
