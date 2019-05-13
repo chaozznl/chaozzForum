@@ -4,14 +4,14 @@
 	$default_group_id = 3; //1=admin/2=moderator/3=member/4=banned
 
 	$smiles = array(
-		':)'=>'fas fa-smile',
-		':P'=>'fas fa-grin-tongue-wink',
-		';)'=>'"fas fa-smile-wink',
-		':D'=>'fas fa-laugh-beam',
-		':}'=>'fas fa-grin-beam-sweat',
-		'<3'=>'fas fa-kiss-beam',
-		';3'=>'fas fa-kiss-wink-heart',
-		':{'=>'fas fa-sad-tear',
+		':-)'=>'fas fa-smile',
+		':-P'=>'fas fa-grin-tongue-wink',
+		';-)'=>'"fas fa-smile-wink',
+		':-D'=>'fas fa-laugh-beam',
+		':-}'=>'fas fa-grin-beam-sweat',
+		':-*'=>'fas fa-kiss-beam',
+		';-3'=>'fas fa-kiss-wink-heart',
+		':-{'=>'fas fa-sad-tear',
 		':=('=>'fas fa-sad-cry'
 	);
 	
@@ -176,13 +176,12 @@
 	
 	Function Code2HTML($match)
 	{
-		// this replaces [ ] ( and ) for their html code counterparts, so that the bbc code inside pre tags are not processed
+		// this replaces [ and ] for their html code counterparts, so that the bbc code inside pre tags are not processed
 		$match[0] = substr($match[0], 0, -7); // cut off [/code]
 		$match[0] = substr($match[0], 6); // cut off [code]
 		$match[0] = str_replace ("[", "&#91;", $match[0]);
 		$match[0] = str_replace ("]", "&#93;", $match[0]);
-		$match[0] = str_replace ("(", "&#40;", $match[0]);
-		$match[0] = str_replace (")", "&#41;", $match[0]);
+		$match[0] = br2nl ($match[0]); // pre uses newline, not br
 		return "<strong>code:</strong><pre>".$match[0]."</pre>";
 	}
 	
@@ -191,11 +190,6 @@
 		// this replaces [ and ] for their html code counterparts, so that the bbc code inside pre tags are not processed
 		$match[0] = substr($match[0], 0, -5); // cut off [/li]
 		$match[0] = substr($match[0], 4); // cut off [li]
-		$match[0] = str_replace ("[", "&#91;", $match[0]);
-		$match[0] = str_replace ("]", "&#93;", $match[0]);
-		$match[0] = str_replace ("(", "&#40;", $match[0]);
-		$match[0] = str_replace (")", "&#41;", $match[0]);
-		$match[0] = str_replace (PHP_EOL, "", $match[0]);
 		return '<li class="forum-list">'.$match[0].'</li>';
 	}
 	
@@ -203,6 +197,8 @@
 	{
 		global $smiles;
 		
+		$text = htmlentities ($text); // convert html for displaying instead of processing it
+		$text = nl2br2 ($text); // convert newline to <br>
 		$text = preg_replace_callback("#\[code\](.*?)\[/code\]#si","Code2HTML" , $text);
 		$text = preg_replace("#\[quote\](.*?)\[/quote\]#si","<strong>quote:</strong><pre>\\1</pre>", $text);
 		$text = preg_replace("#\[b\](.*?)\[/b\]#si","<b>\\1</b>", $text);
@@ -216,8 +212,11 @@
 		$text = preg_replace_callback("#\[youtube\](.*?)\[/youtube\]#si", "Youtube2Embed", $text);
 		$text = preg_replace("#\[list\](.*?)\[/list\]#si","<ul>\\1</ul>", $text);
 		$text = preg_replace_callback("#\[li\](.*?)\[/li\]#si","RemoveBreak4LI", $text);
+		
+		// convert the smilies
 		foreach($smiles as $smile=>$image)
 			$text = str_replace($smile,'<i class="'.$image.' forum-smiley"></i>', $text);
+			
 		return $text;
 	}
 	
