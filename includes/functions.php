@@ -176,11 +176,13 @@
 	
 	Function Code2HTML($match)
 	{
-		// this replaces [ and ] for their html code counterparts, so that the bbc code inside pre tags are not processed
+		// this replaces [ ] ( and ) for their html code counterparts, so that the bbc code inside pre tags are not processed
 		$match[0] = substr($match[0], 0, -7); // cut off [/code]
 		$match[0] = substr($match[0], 6); // cut off [code]
 		$match[0] = str_replace ("[", "&#91;", $match[0]);
 		$match[0] = str_replace ("]", "&#93;", $match[0]);
+		$match[0] = str_replace ("(", "&#40;", $match[0]);
+		$match[0] = str_replace (")", "&#41;", $match[0]);
 		return "<strong>code:</strong><pre>".$match[0]."</pre>";
 	}
 	
@@ -191,6 +193,8 @@
 		$match[0] = substr($match[0], 4); // cut off [li]
 		$match[0] = str_replace ("[", "&#91;", $match[0]);
 		$match[0] = str_replace ("]", "&#93;", $match[0]);
+		$match[0] = str_replace ("(", "&#40;", $match[0]);
+		$match[0] = str_replace (")", "&#41;", $match[0]);
 		$match[0] = str_replace (PHP_EOL, "", $match[0]);
 		return '<li class="forum-list">'.$match[0].'</li>';
 	}
