@@ -37,7 +37,7 @@
 		<meta name="description" content="chaozzForum - Flatfile Forum Software" />
 		<meta name="keywords" content="Forum, Flatfile, No database, Simple, Boards, Forums, chaozzForum, chaozzDB" />
 		<meta name="author" content="E. Wenners / www.chaozz.nl" />
-		<title><?php echo urldecode($settings[0]['forum_title']) ?></title>
+		<title><?php echo urldecode($settings[0]['forum_title']) ?> - <?php echo urldecode($settings[0]['forum_subtitle']) ?></title>
 		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
 		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
 		<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
