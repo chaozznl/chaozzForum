@@ -82,7 +82,7 @@
 						<!-- topic count //-->
 						<div class="column col-2 div-content">
 							<?php echo $num_topics; ?> <?php echo $txt[36]; ?><br>
-							<?php echo $num_posts; ?> <?php echo $txt[37]; ?>
+							<?php echo $num_posts; ?> <?php echo $txt[99]; ?>
 						</div>
 				
 						<!-- last post update //-->
