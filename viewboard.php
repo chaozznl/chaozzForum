@@ -110,6 +110,9 @@
 				
 				// original topic starter
 				$user = chaozzdb_query ("SELECT * FROM user WHERE id = {$topic[$i]['user_id']}"); // who posted this?
+				
+				// last reply info
+				$last_reply_user = chaozzdb_query ("SELECT * FROM user WHERE id = {$reply[0]['user_id']}"); // who replied last?
 ?>
 					<div class="columns">		
 						<div class="column col-12">
@@ -130,7 +133,7 @@
 								</div>	
 								<div class="column col-3 div-content">
 									<td width="300" class="post"><?php $txt[143]; ?> <?php echo Number2Date($reply[0]['create_date']); ?> 
-									<?php echo $txt[38]; ?> <a href="<?php echo $url; ?>/profile/user_id/<?php echo intval($user[0]['id']); ?>.htm"><?php echo urldecode($user[0]['name']); ?></a>
+									<?php echo $txt[38]; ?> <a href="<?php echo $url; ?>/profile/user_id/<?php echo intval($last_reply_user[0]['id']); ?>.htm"><?php echo urldecode($last_reply_user[0]['name']); ?></a>
 								</div>	
 							</div>
 						</div>

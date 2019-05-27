@@ -28,31 +28,30 @@
 			for ($j = 0; $j < count($board); $j++)
 			{
 				if (intval($board[$j]['hidden']) == 1 && !$show_hidden) continue; // hidden board but not allowed to view hidden? skip this board
-				$last_post_id = 0;
 				$last_post_topic_id = 0;
 				$last_post_title = "-";
 				$last_post_user = "-";
 				$last_post_date = "-";
 				
-				$topic = chaozzdb_query ("SELECT * FROM topic WHERE board_id = {$board[$j]['id']}");
+				$topic = chaozzdb_query ("SELECT * FROM topic WHERE board_id = {$board[$j]['id']} ORDER BY update_date DESC");
 				if (count($topic) == 0) { $num_topics = 0; $num_posts = 0;}
 				else 
 				{ 
 					$num_topics = count($topic); 
 					for ($k = 0; $k < count($topic); $k++) 
 					{
-						$post = chaozzdb_query ("SELECT * FROM post WHERE topic_id = {$topic[$k]['id']} ORDER BY id DESC"); // last post in topic first
+						$post = chaozzdb_query ("SELECT * FROM post WHERE topic_id = {$topic[$k]['id']} ORDER BY create_date DESC"); // last post in topic first
 						$num_posts = count($post); 
-						if (count($post) > 0) 
-						{ 
-							$last_post_id = intval($post[0]['id']);
+						// the most recent updated topic: $k=0
+						if ($k == 0)
+						{
 							$last_post_title = htmlentities(urldecode($topic[$k]['name']));
 							$last_post_topic_id = intval($topic[$k]['id']);
-							$last_post_user_id = intval($topic[$k]['last_poster_id']);
-							$last_user = chaozzdb_query ("SELECT * FROM user WHERE id = $last_post_user_id"); // query user table for the name of this user
+							$last_post_user_id = intval($post[0]['user_id']);
+							$last_user = chaozzdb_query ("SELECT * FROM user WHERE id = {$post[0]['user_id']}"); // query user table for the name of this user
 							$last_post_user = urldecode($last_user[0]['name']);
 							$last_post_date = Number2Date($post[0]['create_date']); // convert database date format to readable format
-						}				
+						}
 					}
 				}	
 				

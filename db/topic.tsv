@@ -1,2 +1,2 @@
-id	name	user_id	board_id	locked	sticky	create_date	update_date	last_poster_id
-1	Example+topic	1	1	0	0	20190413194431	20190415115004	1
+id	name	user_id	board_id	locked	sticky	create_date	update_date
+1	Example+topic	1	1	0	0	20190413194431	20190415115004
