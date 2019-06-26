@@ -6,7 +6,7 @@
     if ($action == "logout") 
 	{
 		session_destroy();
-		Message($txt[22], $txt[101],"true");
+		Message($txt[22], $txt[101], true);
 	}
 	
 	// login

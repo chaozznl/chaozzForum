@@ -122,6 +122,11 @@
 		if (strlen($save['name']) < 0 || strlen($save['name']) > intval($settings[0]['max_username_length']))
 			Message ($txt[11], $txt[150], true);
 		
+		// check if the username is already in use
+		$in_use = chaozzdb_query ("SELECT * FROM user WHERE name = {$save['name']}");
+		if (count($in_use) > 0)
+			Message ($txt[11], $txt[80], true);
+		
 		// signature length check
 		if (strlen($save['signature']) > intval($settings[0]['max_signature_length']))
 			Message ($txt[11], $txt[151], true);
