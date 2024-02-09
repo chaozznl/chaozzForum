@@ -1,5 +1,5 @@
 # chaozzForum
-A lightweight, simple-to-use, responsive, customizable, flatfile (no MySQL) forum
+A lightweight, simple-to-use, responsive, customizable, flatfile (no MySQL) forum. Written as a proof-of-concept for [chaozzDB](https://github.com/chaozznl/chaozzDB).
 
 # Main features:
 - Responsive design (mobile friendly!) using spectre.css
