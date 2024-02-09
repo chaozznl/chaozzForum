@@ -6,7 +6,7 @@ A lightweight, simple-to-use, responsive, customizable, flatfile (no MySQL) foru
 - Uses font awesome for all icons and bbc
 - Simple to use for anyone who has ever used forum software
 - Appearance can be changed in a single css file
-- Uses a flatfile database engine (no MySQL needed)
+- Uses a [flatfile database engine](https://github.com/chaozznl/chaozzDB) (no MySQL needed)
 - SEO friendly URL’s
 
 # How to start using chaozzForum:
